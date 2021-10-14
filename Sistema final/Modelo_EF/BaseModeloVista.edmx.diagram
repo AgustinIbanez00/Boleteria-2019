@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3dc2157fc955498bbe0b907c85a11053" Name="Diagram1" ShowGrid="false">
+        <EntityTypeShape EntityType="boleteria_betaModel.Cuenta" Width="1.5" PointX="4.375" PointY="0.5" IsExpanded="true" FillColor="Tan" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Destino" Width="1.5" PointX="0.5" PointY="2.625" IsExpanded="true" FillColor="Coral" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Horario" Width="1.5" PointX="6.25" PointY="0.5" IsExpanded="true" FillColor="128, 255, 255" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Pago" Width="1.5" PointX="4.375" PointY="3.25" IsExpanded="true" FillColor="LimeGreen" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Fila" Width="1.5" PointX="10.25" PointY="0.5" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Celda" Width="1.5" PointX="8" PointY="0.5" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Celda_dbo_Fila_Fila_Id" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Distribucion" Width="1.5" PointX="8.125" PointY="2.875" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Fila_dbo_Distribucion_Distribucion_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Fila_dbo_Distribucion_Distribucion_Id1" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Horario_dbo_Distribucion_Distribucion_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Horario_dbo_Fila_Frecuencia_Id" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Viaje" Width="1.5" PointX="6.25" PointY="3.375" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Horario_dbo_Viaje_Viaje_Id" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Arista" Width="1.5" PointX="10.25" PointY="3.25" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Arista_dbo_Destino_Destino_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Arista_dbo_Destino_Origen_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Arista_dbo_Viaje_Viaje_Id" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Boleto" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="boleteria_betaModel.Cliente" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Boleto_dbo_Cliente_Pasajero_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Boleto_dbo_Destino_Destino_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Boleto_dbo_Destino_Origen_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Boleto_dbo_Pago_Pago_Id" />
+        <AssociationConnector Association="boleteria_betaModel.FK_dbo_Boleto_dbo_Viaje_Recorrido_Id" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
