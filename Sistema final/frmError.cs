@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmLoading : Form
     {
@@ -36,7 +36,7 @@ namespace Sistema_final
                         {
                             if (cbFilas.SelectedItem == null)
                                 cbFilas.SelectedIndex = 0;
-                            int cant_filas = Convert.ToInt32(cbFilas.SelectedItem.ToString());
+                            int cant_filas = Convert.ToInt32(cbFilas.SelectedItem?.ToString());
 
                             var boletos = (from b in db.Boletos orderby b.FechaEmision descending select b).Take(cant_filas).ToList();
                             Boletos_LoadReferences(ref boletos, db);
@@ -64,7 +64,7 @@ namespace Sistema_final
                             cbFilas.SelectedIndex = cbFilas.SelectedIndex;
                         if (cbPagina.SelectedItem == null) cbPagina.SelectedItem = "1";
 
-                        ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+                        ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
                         actualizando = false;
 
                     }
@@ -102,8 +102,8 @@ namespace Sistema_final
                                 try
                                 {
 
-                                    int page = Convert.ToInt32(cbPagina.SelectedItem.ToString());
-                                    int rowsPerPage = Convert.ToInt32(cbFilas.SelectedItem.ToString());
+                                    int page = Convert.ToInt32(cbPagina.SelectedItem?.ToString());
+                                    int rowsPerPage = Convert.ToInt32(cbFilas.SelectedItem?.ToString());
 
                                     var inicio = page * rowsPerPage;
                                     var boletos = boletos_dibujados.OrderByDescending(b => b.FechaEmision)
@@ -145,12 +145,12 @@ namespace Sistema_final
         {
             var paginas = new List<String>();
 
-            string selectedItem = cbPagina.SelectedItem.ToString();
+            string selectedItem = cbPagina.SelectedItem?.ToString();
 
             if (force_reload)
             {
-                decimal f_cant_paginas = Decimal.Divide(boletos_dibujados.Count, Convert.ToInt32(cbFilas.SelectedItem.ToString()));
-                int t_cant_paginas = boletos_dibujados.Count / Convert.ToInt32(cbFilas.SelectedItem.ToString());
+                decimal f_cant_paginas = Decimal.Divide(boletos_dibujados.Count, Convert.ToInt32(cbFilas.SelectedItem?.ToString()));
+                int t_cant_paginas = boletos_dibujados.Count / Convert.ToInt32(cbFilas.SelectedItem?.ToString());
                 if (f_cant_paginas > t_cant_paginas)
                 {
                     t_cant_paginas++;

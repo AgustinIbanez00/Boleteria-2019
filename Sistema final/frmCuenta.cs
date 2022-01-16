@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Extensions;
+using Boleteria.Core.Models;
+using Boleteria.Models;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmCuenta : Form
     {

@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Extensions;
+using Boleteria.Core.Models;
+using Boleteria.Models;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmLogin : Form
     {    
@@ -17,8 +19,11 @@ namespace Sistema_final
         {
             InitializeComponent();
             ttMensajes.UseAnimation = true;
+
+
             using (EntityDataModel db = new EntityDataModel())
             {
+                db.Database.EnsureCreated();
                 lblCuentas.Text = "Cuentas: " + db.Cuentas.Count();
             }
         }
@@ -81,7 +86,7 @@ namespace Sistema_final
                 {
                     if (tbUsuario.Text != string.Empty)
                     {
-                        if (db.Cuentas.Where(c => c.Usuario == tbUsuario.Text).Count() == 0)
+                        if (!db.Cuentas.Where(c => c.Usuario == tbUsuario.Text).Any())
                         {
                             if (tbContraseña.Text != string.Empty)
                             {
@@ -91,13 +96,13 @@ namespace Sistema_final
                                     {
                                         if (tbCorreo.Text != string.Empty)
                                         {
-                                            if (tbCorreo.Text.Contains("@"))
+                                            if (tbCorreo.Text.Contains('@'))
                                             {
                                                 if (cbSexo.SelectedItem != null)
                                                 {
                                                     string hashPassword = SecurePasswordHasher.Hash(tbContraseña.Text);
 
-                                                    Cuenta c = new Cuenta(tbUsuario.Text, hashPassword, tbCorreo.Text, dtpFechaNac.Value.Date, frmDestinos.GetDBDateNow(db), cbSexo.Items[cbSexo.SelectedIndex].ToString(), "boleteria");
+                                                    Cuenta c = new Cuenta(tbUsuario.Text, hashPassword, tbCorreo.Text, dtpFechaNac.Value.Date, FrmDestinos.GetDBDateNow(db), cbSexo.Items[cbSexo.SelectedIndex].ToString(), "boleteria");
                                                     db.Cuentas.Add(c);
                                                     db.SaveChanges();
                                                    

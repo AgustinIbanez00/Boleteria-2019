@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Models;
+using Boleteria.Models;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmAsientosSelect : Form
     {
@@ -22,18 +23,18 @@ namespace Sistema_final
 
         #region Métodos delegados.
 
-        public static void Viajes_LoadReferences(ref List<Viaje> viajes, EntityDataModel db) { frmDestinos.Viajes_LoadReferences(ref viajes, db); }
-        public static void Viaje_LoadReferences(Viaje viaje, EntityDataModel db) { frmDestinos.Viaje_LoadReferences(viaje, db); }
-        public static void Boletos_LoadReferences(ref List<Boleto> boletos, EntityDataModel db) { frmDestinos.Boletos_LoadReferences(ref boletos, db); }
-        public static void Boleto_LoadReferences(Boleto boleto, EntityDataModel db) { frmDestinos.Boleto_LoadReferences(boleto, db); }
-        public static void Distribucion_LoadReferences(Distribucion distribucion, EntityDataModel db) { frmDestinos.Distribucion_LoadReferences(distribucion, db); }
-        public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje) { return frmDestinos.GetDBViaje(db, nombre_viaje); }
-        public static Distribucion GetDBDistribucion(EntityDataModel db, string nota) { return frmDestinos.GetDBDistribucion(db, nota); }
-        public static Boleto GetDBBoleto(EntityDataModel db, int id) { return frmDestinos.GetDBBoleto(db, id); }
-        public static Destino GetDBDestino(EntityDataModel db, string nombre_destino) { return frmDestinos.GetDBDestino(db, nombre_destino); }
-        public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente) { return frmDestinos.GetDBCliente(db, nombre_cliente); }
-        public static Cliente GetDBCliente(EntityDataModel db, long dni_cliente) { return frmDestinos.GetDBCliente(db, dni_cliente); }
-        public static DateTime GetDBDateNow(EntityDataModel db) { return frmDestinos.GetDBDateNow(db); }
+        public static void Viajes_LoadReferences(ref List<Viaje> viajes, EntityDataModel db) { FrmDestinos.Viajes_LoadReferences(ref viajes, db); }
+        public static void Viaje_LoadReferences(Viaje viaje, EntityDataModel db) { FrmDestinos.Viaje_LoadReferences(viaje, db); }
+        public static void Boletos_LoadReferences(ref List<Boleto> boletos, EntityDataModel db) { FrmDestinos.Boletos_LoadReferences(ref boletos, db); }
+        public static void Boleto_LoadReferences(Boleto boleto, EntityDataModel db) { FrmDestinos.Boleto_LoadReferences(boleto, db); }
+        public static void Distribucion_LoadReferences(Distribucion distribucion, EntityDataModel db) { FrmDestinos.Distribucion_LoadReferences(distribucion, db); }
+        public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje) { return FrmDestinos.GetDBViaje(db, nombre_viaje); }
+        public static Distribucion GetDBDistribucion(EntityDataModel db, string nota) { return FrmDestinos.GetDBDistribucion(db, nota); }
+        public static Boleto GetDBBoleto(EntityDataModel db, int id) { return FrmDestinos.GetDBBoleto(db, id); }
+        public static Destino GetDBDestino(EntityDataModel db, string nombre_destino) { return FrmDestinos.GetDBDestino(db, nombre_destino); }
+        public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente) { return FrmDestinos.GetDBCliente(db, nombre_cliente); }
+        public static Cliente GetDBCliente(EntityDataModel db, long dni_cliente) { return FrmDestinos.GetDBCliente(db, dni_cliente); }
+        public static DateTime GetDBDateNow(EntityDataModel db) { return FrmDestinos.GetDBDateNow(db); }
 
         #endregion
 

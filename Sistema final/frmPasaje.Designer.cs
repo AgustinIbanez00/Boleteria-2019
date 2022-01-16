@@ -1,4 +1,4 @@
-﻿namespace Sistema_final
+﻿namespace Boleteria
 {
     partial class frmPasaje
     {
@@ -375,7 +375,7 @@
             this.cbMostrarTodo.Text = "Mostrar todo";
             this.cbMostrarTodo.UseVisualStyleBackColor = true;
             this.cbMostrarTodo.Visible = false;
-            this.cbMostrarTodo.CheckedChanged += new System.EventHandler(this.cbMostrarTodo_CheckedChanged);
+            this.cbMostrarTodo.CheckedChanged += new System.EventHandler(this.CbMostrarTodo_CheckedChanged);
             // 
             // btnOperar
             // 
@@ -402,7 +402,7 @@
             this.cbDNI.Name = "cbDNI";
             this.cbDNI.Size = new System.Drawing.Size(136, 22);
             this.cbDNI.TabIndex = 12;
-            this.cbDNI.TextChanged += new System.EventHandler(this.cbDNI_TextChanged);
+            this.cbDNI.TextChanged += new System.EventHandler(this.CbDNI_TextChanged);
             this.cbDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbDNI_KeyPress_1);
             // 
             // cbNombre
@@ -414,7 +414,7 @@
             this.cbNombre.Name = "cbNombre";
             this.cbNombre.Size = new System.Drawing.Size(253, 22);
             this.cbNombre.TabIndex = 11;
-            this.cbNombre.TextChanged += new System.EventHandler(this.cbNombre_TextChanged);
+            this.cbNombre.TextChanged += new System.EventHandler(this.CbNombre_TextChanged);
             this.cbNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbNombre_KeyPress);
             // 
             // rbEliminar
@@ -426,7 +426,7 @@
             this.rbEliminar.TabIndex = 10;
             this.rbEliminar.Text = "Eliminar";
             this.rbEliminar.UseVisualStyleBackColor = true;
-            this.rbEliminar.CheckedChanged += new System.EventHandler(this.rbEliminar_CheckedChanged);
+            this.rbEliminar.CheckedChanged += new System.EventHandler(this.RbEliminar_CheckedChanged);
             // 
             // rbEditar
             // 
@@ -459,7 +459,7 @@
             this.dtpFechaNac.Name = "dtpFechaNac";
             this.dtpFechaNac.Size = new System.Drawing.Size(136, 22);
             this.dtpFechaNac.TabIndex = 7;
-            this.dtpFechaNac.ValueChanged += new System.EventHandler(this.dtpFechaNac_ValueChanged);
+            this.dtpFechaNac.ValueChanged += new System.EventHandler(this.DtpFechaNac_ValueChanged);
             // 
             // lblRegFechaNac
             // 

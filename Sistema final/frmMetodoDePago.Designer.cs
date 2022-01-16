@@ -1,4 +1,4 @@
-﻿namespace Sistema_final
+﻿namespace Boleteria
 {
     partial class frmMetodoDePago
     {

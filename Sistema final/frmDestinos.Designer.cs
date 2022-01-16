@@ -1,6 +1,6 @@
-﻿namespace Sistema_final
+﻿namespace Boleteria
 {
-    partial class frmDestinos
+    partial class FrmDestinos
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDestinos));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDestinos));
             this.lblLugar = new System.Windows.Forms.Label();
             this.gbTodosDestinos = new System.Windows.Forms.GroupBox();
             this.btnLugarUbicacion = new System.Windows.Forms.Button();
@@ -184,7 +184,7 @@
             // lblLugar
             // 
             this.lblLugar.AutoSize = true;
-            this.lblLugar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLugar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblLugar.Location = new System.Drawing.Point(6, 23);
             this.lblLugar.Name = "lblLugar";
             this.lblLugar.Size = new System.Drawing.Size(45, 14);
@@ -211,7 +211,7 @@
             // btnLugarUbicacion
             // 
             this.btnLugarUbicacion.BackColor = System.Drawing.Color.Transparent;
-            this.btnLugarUbicacion.BackgroundImage = global::Sistema_final.Properties.Resources.editar2;
+            this.btnLugarUbicacion.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnLugarUbicacion.BackgroundImage")));
             this.btnLugarUbicacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnLugarUbicacion.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.btnLugarUbicacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -228,8 +228,8 @@
             this.btnLugarGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLugarGuardar.AutoSize = true;
             this.btnLugarGuardar.Enabled = false;
-            this.btnLugarGuardar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLugarGuardar.Image = global::Sistema_final.Properties.Resources.guardar1;
+            this.btnLugarGuardar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnLugarGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnLugarGuardar.Image")));
             this.btnLugarGuardar.Location = new System.Drawing.Point(336, 66);
             this.btnLugarGuardar.Name = "btnLugarGuardar";
             this.btnLugarGuardar.Size = new System.Drawing.Size(91, 32);
@@ -277,7 +277,7 @@
             this.gbConexiones.Controls.Add(this.pnlDestinos);
             this.gbConexiones.Location = new System.Drawing.Point(6, 218);
             this.gbConexiones.Name = "gbConexiones";
-            this.gbConexiones.Size = new System.Drawing.Size(433, 263);
+            this.gbConexiones.Size = new System.Drawing.Size(433, 267);
             this.gbConexiones.TabIndex = 13;
             this.gbConexiones.TabStop = false;
             this.gbConexiones.Text = "Destinos";
@@ -308,7 +308,7 @@
             this.dgvConexiones.RowHeadersVisible = false;
             this.dgvConexiones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvConexiones.ShowEditingIcon = false;
-            this.dgvConexiones.Size = new System.Drawing.Size(427, 207);
+            this.dgvConexiones.Size = new System.Drawing.Size(427, 211);
             this.dgvConexiones.TabIndex = 13;
             // 
             // Origen
@@ -532,8 +532,8 @@
             // 
             this.btnConexConectar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnConexConectar.AutoSize = true;
-            this.btnConexConectar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConexConectar.Image = global::Sistema_final.Properties.Resources.refresh;
+            this.btnConexConectar.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnConexConectar.Image = ((System.Drawing.Image)(resources.GetObject("btnConexConectar.Image")));
             this.btnConexConectar.Location = new System.Drawing.Point(329, 211);
             this.btnConexConectar.Name = "btnConexConectar";
             this.btnConexConectar.Size = new System.Drawing.Size(99, 35);
@@ -641,7 +641,7 @@
             // btnDestinoEliminar
             // 
             this.btnDestinoEliminar.BackColor = System.Drawing.Color.Transparent;
-            this.btnDestinoEliminar.BackgroundImage = global::Sistema_final.Properties.Resources.eliminar;
+            this.btnDestinoEliminar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDestinoEliminar.BackgroundImage")));
             this.btnDestinoEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDestinoEliminar.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.btnDestinoEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -657,7 +657,7 @@
             // btnUbicacion
             // 
             this.btnUbicacion.BackColor = System.Drawing.Color.Transparent;
-            this.btnUbicacion.BackgroundImage = global::Sistema_final.Properties.Resources.editar2;
+            this.btnUbicacion.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUbicacion.BackgroundImage")));
             this.btnUbicacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnUbicacion.FlatAppearance.BorderColor = System.Drawing.Color.DeepSkyBlue;
             this.btnUbicacion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
@@ -668,7 +668,6 @@
             this.btnUbicacion.TabIndex = 8;
             this.btnUbicacion.UseVisualStyleBackColor = false;
             this.btnUbicacion.Visible = false;
-            this.btnUbicacion.Click += new System.EventHandler(this.btnUbicacion_Click);
             // 
             // lblNombre
             // 
@@ -683,8 +682,8 @@
             // 
             this.btnCrearD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCrearD.AutoSize = true;
-            this.btnCrearD.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCrearD.Image = global::Sistema_final.Properties.Resources.visto1;
+            this.btnCrearD.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCrearD.Image = ((System.Drawing.Image)(resources.GetObject("btnCrearD.Image")));
             this.btnCrearD.Location = new System.Drawing.Point(334, 47);
             this.btnCrearD.Name = "btnCrearD";
             this.btnCrearD.Size = new System.Drawing.Size(91, 31);
@@ -692,7 +691,7 @@
             this.btnCrearD.Text = "Crear";
             this.btnCrearD.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCrearD.UseVisualStyleBackColor = true;
-            this.btnCrearD.Click += new System.EventHandler(this.btnCrearD_Click);
+            this.btnCrearD.Click += new System.EventHandler(this.BtnCrearD_Click);
             // 
             // lblUbicacion
             // 
@@ -778,8 +777,8 @@
             // btnViajeCrear
             // 
             this.btnViajeCrear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnViajeCrear.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnViajeCrear.Image = global::Sistema_final.Properties.Resources.nuevo;
+            this.btnViajeCrear.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnViajeCrear.Image = ((System.Drawing.Image)(resources.GetObject("btnViajeCrear.Image")));
             this.btnViajeCrear.Location = new System.Drawing.Point(329, 167);
             this.btnViajeCrear.Name = "btnViajeCrear";
             this.btnViajeCrear.Size = new System.Drawing.Size(100, 38);
@@ -942,10 +941,10 @@
             this.tpHorarios.Controls.Add(this.gbHorControl);
             this.tpHorarios.Controls.Add(this.gbHorHorarios);
             this.tpHorarios.Controls.Add(this.gbHorRecorridos);
-            this.tpHorarios.Location = new System.Drawing.Point(4, 23);
+            this.tpHorarios.Location = new System.Drawing.Point(4, 24);
             this.tpHorarios.Name = "tpHorarios";
             this.tpHorarios.Padding = new System.Windows.Forms.Padding(3);
-            this.tpHorarios.Size = new System.Drawing.Size(447, 487);
+            this.tpHorarios.Size = new System.Drawing.Size(447, 486);
             this.tpHorarios.TabIndex = 2;
             this.tpHorarios.Text = "Horarios";
             // 
@@ -993,8 +992,8 @@
             // btnHorCrear
             // 
             this.btnHorCrear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnHorCrear.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHorCrear.Image = global::Sistema_final.Properties.Resources.calendario;
+            this.btnHorCrear.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnHorCrear.Image = ((System.Drawing.Image)(resources.GetObject("btnHorCrear.Image")));
             this.btnHorCrear.Location = new System.Drawing.Point(324, 142);
             this.btnHorCrear.Name = "btnHorCrear";
             this.btnHorCrear.Size = new System.Drawing.Size(103, 32);
@@ -1212,10 +1211,10 @@
             this.tpDestinos.Controls.Add(this.gbCrearDestino);
             this.tpDestinos.Controls.Add(this.gbTodosDestinos);
             this.tpDestinos.Controls.Add(this.gbConexiones);
-            this.tpDestinos.Location = new System.Drawing.Point(4, 23);
+            this.tpDestinos.Location = new System.Drawing.Point(4, 24);
             this.tpDestinos.Name = "tpDestinos";
             this.tpDestinos.Padding = new System.Windows.Forms.Padding(3);
-            this.tpDestinos.Size = new System.Drawing.Size(447, 487);
+            this.tpDestinos.Size = new System.Drawing.Size(447, 486);
             this.tpDestinos.TabIndex = 0;
             this.tpDestinos.Text = "Destinos";
             // 
@@ -1224,10 +1223,10 @@
             this.pbDistribuciones.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.pbDistribuciones.Controls.Add(this.gbManejoDistr);
             this.pbDistribuciones.Controls.Add(this.gbPBModEspacio);
-            this.pbDistribuciones.Location = new System.Drawing.Point(4, 23);
+            this.pbDistribuciones.Location = new System.Drawing.Point(4, 24);
             this.pbDistribuciones.Name = "pbDistribuciones";
             this.pbDistribuciones.Padding = new System.Windows.Forms.Padding(3);
-            this.pbDistribuciones.Size = new System.Drawing.Size(447, 487);
+            this.pbDistribuciones.Size = new System.Drawing.Size(447, 486);
             this.pbDistribuciones.TabIndex = 3;
             this.pbDistribuciones.Text = "Butacas";
             // 
@@ -1252,7 +1251,7 @@
             // btnModEGuardar
             // 
             this.btnModEGuardar.AutoSize = true;
-            this.btnModEGuardar.Image = global::Sistema_final.Properties.Resources.guardar;
+            this.btnModEGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnModEGuardar.Image")));
             this.btnModEGuardar.Location = new System.Drawing.Point(386, 20);
             this.btnModEGuardar.Name = "btnModEGuardar";
             this.btnModEGuardar.Size = new System.Drawing.Size(39, 38);
@@ -1381,7 +1380,7 @@
             // rbPBModENinguno
             // 
             this.rbPBModENinguno.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbPBModENinguno.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rbPBModENinguno.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.rbPBModENinguno.Location = new System.Drawing.Point(6, 20);
             this.rbPBModENinguno.Name = "rbPBModENinguno";
             this.rbPBModENinguno.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1397,8 +1396,8 @@
             // rbPBModEAsiento
             // 
             this.rbPBModEAsiento.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbPBModEAsiento.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPBModEAsiento.Image = global::Sistema_final.Properties.Resources.butaca1;
+            this.rbPBModEAsiento.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbPBModEAsiento.Image = ((System.Drawing.Image)(resources.GetObject("rbPBModEAsiento.Image")));
             this.rbPBModEAsiento.Location = new System.Drawing.Point(6, 64);
             this.rbPBModEAsiento.Name = "rbPBModEAsiento";
             this.rbPBModEAsiento.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1415,8 +1414,8 @@
             // rbPBModETelevision
             // 
             this.rbPBModETelevision.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbPBModETelevision.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPBModETelevision.Image = global::Sistema_final.Properties.Resources.tele21;
+            this.rbPBModETelevision.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbPBModETelevision.Image = ((System.Drawing.Image)(resources.GetObject("rbPBModETelevision.Image")));
             this.rbPBModETelevision.Location = new System.Drawing.Point(6, 108);
             this.rbPBModETelevision.Name = "rbPBModETelevision";
             this.rbPBModETelevision.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1432,8 +1431,8 @@
             // rbPBModEPasillo
             // 
             this.rbPBModEPasillo.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbPBModEPasillo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbPBModEPasillo.Image = global::Sistema_final.Properties.Resources.pasillo_asiento;
+            this.rbPBModEPasillo.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbPBModEPasillo.Image = ((System.Drawing.Image)(resources.GetObject("rbPBModEPasillo.Image")));
             this.rbPBModEPasillo.Location = new System.Drawing.Point(6, 152);
             this.rbPBModEPasillo.Name = "rbPBModEPasillo";
             this.rbPBModEPasillo.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -1460,7 +1459,7 @@
             // btnPBModEGuardar
             // 
             this.btnPBModEGuardar.AutoSize = true;
-            this.btnPBModEGuardar.Image = global::Sistema_final.Properties.Resources.guardar;
+            this.btnPBModEGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnPBModEGuardar.Image")));
             this.btnPBModEGuardar.Location = new System.Drawing.Point(431, 13);
             this.btnPBModEGuardar.Name = "btnPBModEGuardar";
             this.btnPBModEGuardar.Size = new System.Drawing.Size(39, 38);
@@ -1472,8 +1471,8 @@
             // btnDistrCrear
             // 
             this.btnDistrCrear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDistrCrear.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDistrCrear.Image = global::Sistema_final.Properties.Resources.nuevo;
+            this.btnDistrCrear.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnDistrCrear.Image = ((System.Drawing.Image)(resources.GetObject("btnDistrCrear.Image")));
             this.btnDistrCrear.Location = new System.Drawing.Point(336, 281);
             this.btnDistrCrear.Name = "btnDistrCrear";
             this.btnDistrCrear.Size = new System.Drawing.Size(91, 41);
@@ -1518,7 +1517,7 @@
             this.C3});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1531,7 +1530,7 @@
             this.dgvAsientos.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -1628,7 +1627,7 @@
             // 
             // seleccionarToolStripMenuItem
             // 
-            this.seleccionarToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.seleccionarToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.seleccionarToolStripMenuItem.Name = "seleccionarToolStripMenuItem";
             this.seleccionarToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.seleccionarToolStripMenuItem.Text = "Seleccionar";
@@ -1636,7 +1635,7 @@
             // 
             // conectarToolStripMenuItem
             // 
-            this.conectarToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.refresh;
+            this.conectarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("conectarToolStripMenuItem.Image")));
             this.conectarToolStripMenuItem.Name = "conectarToolStripMenuItem";
             this.conectarToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.conectarToolStripMenuItem.Text = "Conectar";
@@ -1677,7 +1676,7 @@
             this.tDelayQuery.Interval = 1500;
             this.tDelayQuery.Tick += new System.EventHandler(this.tDelayQuery_Tick);
             // 
-            // frmDestinos
+            // FrmDestinos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1685,13 +1684,13 @@
             this.Controls.Add(this.gMPMapa);
             this.Controls.Add(this.tcAdmin);
             this.Controls.Add(this.pnlBotones);
-            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "frmDestinos";
+            this.Name = "FrmDestinos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Administrar";
-            this.Load += new System.EventHandler(this.frmDestinos_Load);
+            this.Load += new System.EventHandler(this.FrmDestinos_Load);
             this.gbTodosDestinos.ResumeLayout(false);
             this.gbTodosDestinos.PerformLayout();
             this.gbConexiones.ResumeLayout(false);

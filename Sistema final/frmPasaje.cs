@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Models;
+using Boleteria.Models;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmPasaje : Form
     {
@@ -20,18 +21,18 @@ namespace Sistema_final
 
         #region Métodos delegados.
 
-        public static void Viajes_LoadReferences(ref List<Viaje> viajes, EntityDataModel db) { frmDestinos.Viajes_LoadReferences(ref viajes, db); }
-        public static void Viaje_LoadReferences(Viaje viaje, EntityDataModel db) { frmDestinos.Viaje_LoadReferences(viaje, db); }
-        public static void Boletos_LoadReferences(ref List<Boleto> boletos, EntityDataModel db) { frmDestinos.Boletos_LoadReferences(ref boletos, db); }
-        public static void Boleto_LoadReferences(Boleto boleto, EntityDataModel db) { frmDestinos.Boleto_LoadReferences(boleto, db); }
-        public static void Distribucion_LoadReferences(Distribucion distribucion, EntityDataModel db) { frmDestinos.Distribucion_LoadReferences(distribucion, db); }
-        public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje) { return frmDestinos.GetDBViaje(db, nombre_viaje); }
-        public static Distribucion GetDBDistribucion(EntityDataModel db, string nota) { return frmDestinos.GetDBDistribucion(db, nota); }
-        public static Boleto GetDBBoleto(EntityDataModel db, int id) { return frmDestinos.GetDBBoleto(db, id); }
-        public static Destino GetDBDestino(EntityDataModel db, string nombre_destino) { return frmDestinos.GetDBDestino(db, nombre_destino); }
-        public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente) { return frmDestinos.GetDBCliente(db, nombre_cliente); }
-        public static Cliente GetDBCliente(EntityDataModel db, int dni_cliente) { return frmDestinos.GetDBCliente(db, dni_cliente); }
-        public static DateTime GetDBDateNow(EntityDataModel db) { return frmDestinos.GetDBDateNow(db); }
+        public static void Viajes_LoadReferences(ref List<Viaje> viajes, EntityDataModel db) { FrmDestinos.Viajes_LoadReferences(ref viajes, db); }
+        public static void Viaje_LoadReferences(Viaje viaje, EntityDataModel db) { FrmDestinos.Viaje_LoadReferences(viaje, db); }
+        public static void Boletos_LoadReferences(ref List<Boleto> boletos, EntityDataModel db) { FrmDestinos.Boletos_LoadReferences(ref boletos, db); }
+        public static void Boleto_LoadReferences(Boleto boleto, EntityDataModel db) { FrmDestinos.Boleto_LoadReferences(boleto, db); }
+        public static void Distribucion_LoadReferences(Distribucion distribucion, EntityDataModel db) { FrmDestinos.Distribucion_LoadReferences(distribucion, db); }
+        public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje) { return FrmDestinos.GetDBViaje(db, nombre_viaje); }
+        public static Distribucion GetDBDistribucion(EntityDataModel db, string nota) { return FrmDestinos.GetDBDistribucion(db, nota); }
+        public static Boleto GetDBBoleto(EntityDataModel db, int id) { return FrmDestinos.GetDBBoleto(db, id); }
+        public static Destino GetDBDestino(EntityDataModel db, string nombre_destino) { return FrmDestinos.GetDBDestino(db, nombre_destino); }
+        public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente) { return FrmDestinos.GetDBCliente(db, nombre_cliente); }
+        public static Cliente GetDBCliente(EntityDataModel db, int dni_cliente) { return FrmDestinos.GetDBCliente(db, dni_cliente); }
+        public static DateTime GetDBDateNow(EntityDataModel db) { return FrmDestinos.GetDBDateNow(db); }
 
         #endregion
 
@@ -80,7 +81,7 @@ namespace Sistema_final
                                     {
                                         if (cbGenero.SelectedIndex >= 0)
                                         {
-                                            if (db.Clientes.Count(cf => cf.DNI.ToString() == cbDNI.Text) == 0)
+                                            if (!db.Clientes.Any(cf => cf.DNI.ToString() == cbDNI.Text))
                                             {
                                                 Cliente c = new Cliente(cbNombre.Text, Convert.ToInt32(cbDNI.Text), cbNacionalidad.Text, cbGenero.Text, dtpFechaNac.Value.Date, GetDBDateNow(db));
                                                 db.Clientes.Add(c);
@@ -118,7 +119,7 @@ namespace Sistema_final
                                     if (cbGenero.SelectedIndex >= 0)
                                     {
                                         string dni = dgvPasajeros.CurrentRow.Cells["DNI"].Value.ToString();
-                                        if (db.Clientes.Count(c => c.DNI.ToString() == cbDNI.Text && c.DNI.ToString() != dni) == 0)
+                                        if (!db.Clientes.Any(c => c.DNI.ToString() == cbDNI.Text && c.DNI.ToString() != dni))
                                         {
                                             Cliente cliente = GetDBCliente(db, Convert.ToInt32(dgvPasajeros.CurrentRow.Cells["DNI"].Value));
                                             if (cliente != null)
@@ -127,7 +128,7 @@ namespace Sistema_final
                                                 cliente.Nombre = cbNombre.Text;
                                                 cliente.FechaNac = dtpFechaNac.Value;
                                                 cliente.Nacionalidad = cbNacionalidad.Text;
-                                                cliente.Genero = cbGenero.SelectedItem.ToString();
+                                                cliente.Genero = cbGenero.SelectedItem?.ToString();
 
                                                 db.SaveChanges();
                                                 cbNombre.Text = string.Empty;
@@ -161,7 +162,7 @@ namespace Sistema_final
                             db.Clientes.Remove(cliente);
                             db.SaveChanges();
                             MessageBox.Show("El cliente se eliminó con éxito.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+                            ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
                         }
                         else
                         {
@@ -170,7 +171,7 @@ namespace Sistema_final
                                 db.Boletos.RemoveRange(db.Boletos.Where(b => b.Pasajero.DNI == cliente.DNI));
                                 db.Clientes.Remove(cliente);
                                 db.SaveChanges();
-                                ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+                                ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
                                 MessageBox.Show("Se eliminaron " + count + " boletos correctamente.", "Acción realizada correctamente.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
@@ -179,7 +180,7 @@ namespace Sistema_final
                 }
                 try
                 {
-                    ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+                    ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
                 }
                 catch(ArgumentException)
                 {
@@ -264,7 +265,7 @@ namespace Sistema_final
             {
             }
         }    
-        private void rbEliminar_CheckedChanged(object sender, EventArgs e)
+        private void RbEliminar_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
@@ -291,9 +292,9 @@ namespace Sistema_final
             {
             }
         }
-        private void cbMostrarTodo_CheckedChanged(object sender, EventArgs e)
+        private void CbMostrarTodo_CheckedChanged(object sender, EventArgs e)
         {
-            ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+            ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
             if(cbMostrarTodo.Checked)
             {
                 cbFilas.Enabled = false;
@@ -305,7 +306,7 @@ namespace Sistema_final
                 lblNumeroFilas.Enabled = true;
             }
         }
-        private void cbNombre_TextChanged(object sender, EventArgs e)
+        private void CbNombre_TextChanged(object sender, EventArgs e)
         {
             if(rbEditar.Checked)
             {
@@ -313,7 +314,7 @@ namespace Sistema_final
             }
             cbNombre.Text = cbNombre.Text.ToUpper();
         }
-        private void cbDNI_TextChanged(object sender, EventArgs e)
+        private void CbDNI_TextChanged(object sender, EventArgs e)
         {
             if (rbEditar.Checked)
             {
@@ -343,7 +344,7 @@ namespace Sistema_final
     */        
 
         }
-        private void dtpFechaNac_ValueChanged(object sender, EventArgs e)
+        private void DtpFechaNac_ValueChanged(object sender, EventArgs e)
         {
             if (rbEditar.Checked)
             {
@@ -357,7 +358,7 @@ namespace Sistema_final
             int age = 0;
             age = DateTime.Now.Year - dateOfBirth.Year;
             if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
-                age = age - 1;
+                age--;
 
             return age;
         }
@@ -424,7 +425,7 @@ namespace Sistema_final
         {
             try
             {
-                ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+                ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
 
             }
             catch (NullReferenceException)
@@ -495,7 +496,7 @@ namespace Sistema_final
                 cbPagina.Items.Add("1");
                 if (cbFilas.SelectedItem == null) cbFilas.SelectedIndex = 0;
                 if (cbPagina.SelectedItem == null) cbPagina.SelectedItem = "1";
-                for (int i = 1; i < clientes.Count / Convert.ToInt32(cbFilas.SelectedItem.ToString()); i++)
+                for (int i = 1; i < clientes.Count / Convert.ToInt32(cbFilas.SelectedItem?.ToString()); i++)
                 {
                     cbPagina.Items.Add((i + 1).ToString());
                 }
@@ -504,7 +505,7 @@ namespace Sistema_final
                     cbMostrarTodo.Visible = true;
                 }
                 else cbMostrarTodo.Visible = false;
-                ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())) - Convert.ToInt32(cbFilas.SelectedItem.ToString()), (Convert.ToInt32(cbFilas.SelectedItem.ToString()) * Convert.ToInt32(cbPagina.SelectedItem.ToString())));
+                ActualizarInformacion((Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())) - Convert.ToInt32(cbFilas.SelectedItem?.ToString()), (Convert.ToInt32(cbFilas.SelectedItem?.ToString()) * Convert.ToInt32(cbPagina.SelectedItem?.ToString())));
             }
         }
 

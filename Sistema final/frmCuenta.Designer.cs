@@ -1,4 +1,4 @@
-﻿namespace Sistema_final
+﻿namespace Boleteria
 {
     partial class frmCuenta
     {
@@ -165,7 +165,7 @@
             // 
             // pbPerfil
             // 
-            this.pbPerfil.BackgroundImage = global::Sistema_final.Properties.Resources.usuario_x;
+            this.pbPerfil.BackgroundImage = global::Boleteria.Properties.Resources.usuario_x;
             this.pbPerfil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pbPerfil.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbPerfil.Location = new System.Drawing.Point(12, 12);
@@ -177,7 +177,7 @@
             // btnCambiarContraseña
             // 
             this.btnCambiarContraseña.AutoSize = true;
-            this.btnCambiarContraseña.BackgroundImage = global::Sistema_final.Properties.Resources.edit;
+            this.btnCambiarContraseña.BackgroundImage = global::Boleteria.Properties.Resources.edit;
             this.btnCambiarContraseña.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCambiarContraseña.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCambiarContraseña.Location = new System.Drawing.Point(352, 140);

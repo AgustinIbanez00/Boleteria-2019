@@ -6,9 +6,10 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Models;
+using Boleteria.Models;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmPrincipal : Form
     {
@@ -28,22 +29,22 @@ namespace Sistema_final
         string[,] horario_valores = new string[1, 1];
 
         List<Boleto> boletos_dibujados = new List<Boleto>();
-        
+
 
         #region Métodos estáticos.
 
-        public static void Viajes_LoadReferences(ref List<Viaje> viajes, EntityDataModel db) { frmDestinos.Viajes_LoadReferences(ref viajes, db); }
-        public static void Viaje_LoadReferences(Viaje viaje, EntityDataModel db) { frmDestinos.Viaje_LoadReferences(viaje, db); }
-        public static void Boletos_LoadReferences(ref List<Boleto> boletos, EntityDataModel db) { frmDestinos.Boletos_LoadReferences(ref boletos, db); }
-        public static void Boleto_LoadReferences(Boleto boleto, EntityDataModel db) { frmDestinos.Boleto_LoadReferences(boleto, db); }
-        public static void Distribucion_LoadReferences(Distribucion distribucion, EntityDataModel db) { frmDestinos.Distribucion_LoadReferences(distribucion, db); }
-        public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje) { return frmDestinos.GetDBViaje(db, nombre_viaje); }
-        public static Distribucion GetDBDistribucion(EntityDataModel db, string nota) { return frmDestinos.GetDBDistribucion(db, nota); }
-        public static Boleto GetDBBoleto(EntityDataModel db, int id) { return frmDestinos.GetDBBoleto(db, id); }
-        public static Destino GetDBDestino(EntityDataModel db, string nombre_destino) { return frmDestinos.GetDBDestino(db, nombre_destino); }
-        public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente) { return frmDestinos.GetDBCliente(db, nombre_cliente); }
-        public static Cliente GetDBCliente(EntityDataModel db, int dni_cliente) { return frmDestinos.GetDBCliente(db, dni_cliente); }
-        public static DateTime GetDBDateNow(EntityDataModel db) { return frmDestinos.GetDBDateNow(db); }
+        public static void Viajes_LoadReferences(ref List<Viaje> viajes, EntityDataModel db) { FrmDestinos.Viajes_LoadReferences(ref viajes, db); }
+        public static void Viaje_LoadReferences(Viaje viaje, EntityDataModel db) { FrmDestinos.Viaje_LoadReferences(viaje, db); }
+        public static void Boletos_LoadReferences(ref List<Boleto> boletos, EntityDataModel db) { FrmDestinos.Boletos_LoadReferences(ref boletos, db); }
+        public static void Boleto_LoadReferences(Boleto boleto, EntityDataModel db) { FrmDestinos.Boleto_LoadReferences(boleto, db); }
+        public static void Distribucion_LoadReferences(Distribucion distribucion, EntityDataModel db) { FrmDestinos.Distribucion_LoadReferences(distribucion, db); }
+        public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje) { return FrmDestinos.GetDBViaje(db, nombre_viaje); }
+        public static Distribucion GetDBDistribucion(EntityDataModel db, string nota) { return FrmDestinos.GetDBDistribucion(db, nota); }
+        public static Boleto GetDBBoleto(EntityDataModel db, int id) { return FrmDestinos.GetDBBoleto(db, id); }
+        public static Destino GetDBDestino(EntityDataModel db, string nombre_destino) { return FrmDestinos.GetDBDestino(db, nombre_destino); }
+        public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente) { return FrmDestinos.GetDBCliente(db, nombre_cliente); }
+        public static Cliente GetDBCliente(EntityDataModel db, int dni_cliente) { return FrmDestinos.GetDBCliente(db, dni_cliente); }
+        public static DateTime GetDBDateNow(EntityDataModel db) { return FrmDestinos.GetDBDateNow(db); }
 
         #endregion
 
@@ -88,7 +89,7 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                frmDestinos form = new frmDestinos();
+                FrmDestinos form = new FrmDestinos();
                 if (form.ShowDialog() != DialogResult.None)
                 {
                     try
@@ -108,7 +109,7 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
 
                 if (viaje != null)
                 {
@@ -119,7 +120,7 @@ namespace Sistema_final
 
                         for (int i = 0; i < length; i++)
                         {
-                            if (horario_valores[i, 1] == cbHoraSalidaIda.SelectedItem.ToString())
+                            if (horario_valores[i, 1] == cbHoraSalidaIda.SelectedItem?.ToString())
                             {
                                 index = i;
                             }
@@ -131,7 +132,7 @@ namespace Sistema_final
                             if (horario != null)
                             {
 
-                                frmAsientosSelect form = new frmAsientosSelect(horario.Distribucion, viaje, dtpFechaIda.Value.Date, horario.Hora.ToString(), cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
+                                frmAsientosSelect form = new frmAsientosSelect(horario.Distribucion, viaje, dtpFechaIda.Value.Date, horario.Hora.ToString(), cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
                                 if (form.ShowDialog() == DialogResult.OK)
                                 {
                                     if (form.butaca > 0)
@@ -167,11 +168,11 @@ namespace Sistema_final
             {
                 if (cbPasDNI.Text != string.Empty)
                 {
-                    if (cbOrigen.SelectedItem.ToString() != string.Empty && cbDestino.SelectedItem.ToString() != string.Empty)
+                    if (cbOrigen.SelectedItem?.ToString() != string.Empty && cbDestino.SelectedItem?.ToString() != string.Empty)
                     {
                         if (cbOrigen.Enabled && cbDestino.Enabled)
                         {
-                            if (cbHoraSalidaIda.SelectedItem.ToString() != string.Empty)
+                            if (cbHoraSalidaIda.SelectedItem?.ToString() != string.Empty)
                             {
                                 if (tbAsientoIda.Text != string.Empty)
                                 {
@@ -179,35 +180,33 @@ namespace Sistema_final
                                     {
                                         using (EntityDataModel db = new EntityDataModel())
                                         {
-                                            Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                                            Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                                             DateTime fecha_server = GetDBDateNow(db);
 
                                             if (viaje != null)
                                             {
-                                                Destino origen = GetDBDestino(db, cbOrigen.SelectedItem.ToString());
-                                                Destino destino = GetDBDestino(db, cbDestino.SelectedItem.ToString());
+                                                Destino origen = GetDBDestino(db, cbOrigen.SelectedItem?.ToString());
+                                                Destino destino = GetDBDestino(db, cbDestino.SelectedItem?.ToString());
                                                 Cliente cliente = db.Clientes.Where(c => c.Nombre == cbPasNombre.Text && c.DNI.ToString() == cbPasDNI.Text).FirstOrDefault();
                                                 if (cliente != null)
                                                 {
                                                     int asiento = Convert.ToInt32(tbAsientoIda.Text);
                                                     DateTime fecha = dtpFechaIda.Value;
                                                     string hora_llegada = dtpHoraLlegadaIda.Value.ToShortTimeString();
-                                                    var boleto_comprobacion = db.Boletos.Where(b => b.Recorrido.Nombre == viaje.Nombre && b.Asiento == asiento && b.Fecha == fecha && b.HoraSalida == cbHoraSalidaIda.SelectedItem.ToString() && b.HoraLlegada == hora_llegada).ToList();
 
-                                                    if (boleto_comprobacion.Count <= 0)
+                                                    if (!db.Boletos.Any(b => b.Recorrido.Nombre == viaje.Nombre && b.Asiento == asiento && b.Fecha == fecha && b.HoraSalida == cbHoraSalidaIda.SelectedItem.ToString() && b.HoraLlegada == hora_llegada))
                                                     {
-                                                        Cuenta cuentaUso = frmDestinos.GetDBCuenta(db, cuenta_id);
+                                                        Cuenta cuentaUso = FrmDestinos.GetDBCuenta(db, cuenta_id);
                                                         if (cuentaUso != null)
                                                         {
                                                             DateTime tiempo = ObtenerTiempo(viaje, origen.Nombre, destino.Nombre);
-                                                            Boleto b = new Boleto(viaje, origen, destino, cliente, Convert.ToInt32(tbAsientoIda.Text), dtpFechaIda.Value.Date, ObtenerPrecio(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString()).ToString(), viaje.Horarios[cbHoraSalidaIda.SelectedIndex].Hora.ToString(), cbHoraSalidaIda.SelectedItem.ToString(), dtpHoraLlegadaIda.Value.ToShortTimeString(), cuentaUso);
+                                                            Boleto b = new Boleto(viaje, origen, destino, cliente, Convert.ToInt32(tbAsientoIda.Text), dtpFechaIda.Value.Date, ObtenerPrecio(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString()).ToString(), viaje.Horarios[cbHoraSalidaIda.SelectedIndex].Hora.ToString(), cbHoraSalidaIda.SelectedItem?.ToString(), dtpHoraLlegadaIda.Value.ToShortTimeString(), cuentaUso);
                                                             db.Boletos.Add(b);
-                                                            db.SaveChanges();
                                                             cbPasNombre.Text = string.Empty;
                                                             cbPasDNI.Text = string.Empty;
                                                             dtpFechaIda.Value = fecha_server;
 
-                                                            frmMetodoDePago frm = new frmMetodoDePago(ObtenerPrecio(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString()), b);
+                                                            frmMetodoDePago frm = new frmMetodoDePago(ObtenerPrecio(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString()), b);
                                                             if (frm.ShowDialog() == DialogResult.OK)
                                                             {
                                                                 if (frm.pago != null)
@@ -263,13 +262,13 @@ namespace Sistema_final
                 {
                     using (EntityDataModel db = new EntityDataModel())
                     {
-                        Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                        Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                         if (viaje != null)
                         {
                             frmLoading loading = new frmLoading();
 
                             List<string> siguientes = new List<string>();
-                            MostrarSiguientes(viaje, siguientes, cbOrigen.SelectedItem.ToString(), GetViajeDestinoNombre(viaje));
+                            MostrarSiguientes(viaje, siguientes, cbOrigen.SelectedItem?.ToString(), GetViajeDestinoNombre(viaje));
                             cbDestino.Enabled = false;
                             cbDestino.Items.Clear();
                             foreach (var s in siguientes)
@@ -279,7 +278,7 @@ namespace Sistema_final
                             cbDestino.Items.Add(GetViajeDestinoNombre(viaje));
                             cbDestino.Enabled = true;
 
-                            //DateTime tiempo_llegada = ObtenerTiempo(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
+                            //DateTime tiempo_llegada = ObtenerTiempo(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
 
                             RecargarHorarios();
                             tbAsientoIda.Text = string.Empty;
@@ -304,7 +303,7 @@ namespace Sistema_final
             {
                 using (EntityDataModel db = new EntityDataModel())
                 {
-                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                     try
                     {
                         if (viaje != null)
@@ -323,8 +322,8 @@ namespace Sistema_final
 
                             if (cbOrigen.Items.Count > 0) cbOrigen.SelectedIndex = cbOrigen.Items.IndexOf(GetViajeOrigenNombre(viaje));
                             if (cbDestino.Items.Count > 0) cbDestino.SelectedIndex = cbDestino.Items.IndexOf(GetViajeDestinoNombre(viaje));
-                            
-                            
+
+
                             dtpFechaIda.Value = GetDBDateNow(db);
                         }
                         else
@@ -345,11 +344,11 @@ namespace Sistema_final
             {
                 using (EntityDataModel db = new EntityDataModel())
                 {
-                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                     if (viaje != null)
                     {
-                        DateTime tiempo = ObtenerTiempo(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
-                        DateTime hora_ad = DateTime.Parse(cbHoraSalidaIda.SelectedItem.ToString());
+                        DateTime tiempo = ObtenerTiempo(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
+                        DateTime hora_ad = DateTime.Parse(cbHoraSalidaIda.SelectedItem?.ToString());
 
                         hora_ad = DateTime.Parse(hora_ad.Add(new TimeSpan(tiempo.Hour, tiempo.Minute, 0)).ToShortTimeString());
 
@@ -357,11 +356,15 @@ namespace Sistema_final
 
                         tbAsientoIda.Text = string.Empty;
 
-                        lblPrecio.Text = "Precio: $" + ObtenerPrecio(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
+                        lblPrecio.Text = "Precio: $" + ObtenerPrecio(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
                     }
                 }
             }
             catch (NullReferenceException)
+            {
+
+            }
+            catch(ArgumentNullException)
             {
 
             }
@@ -370,13 +373,13 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                 if (viaje != null)
                 {
                     try
                     {
-                        DateTime tiempo = ObtenerTiempo(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
-                        DateTime hora_ad = DateTime.Parse(cbHoraSalidaIda.SelectedItem.ToString());
+                        DateTime tiempo = ObtenerTiempo(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
+                        DateTime hora_ad = DateTime.Parse(cbHoraSalidaIda.SelectedItem?.ToString());
 
                         hora_ad = DateTime.Parse(hora_ad.Add(new TimeSpan(tiempo.Hour, tiempo.Minute, 0)).ToShortTimeString());
 
@@ -451,8 +454,8 @@ namespace Sistema_final
                             {
                                 int id = Convert.ToInt32(row.Cells["ID"].Value);
                                 Boleto boleto = GetDBBoleto(db, id);
-                                Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
-                                Cuenta cuentaUso = frmDestinos.GetDBCuenta(db, cuenta_id);
+                                Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
+                                Cuenta cuentaUso = FrmDestinos.GetDBCuenta(db, cuenta_id);
                                 if (viaje != null)
                                 {
                                     if (boleto != null)
@@ -461,7 +464,7 @@ namespace Sistema_final
                                         {
                                             if (boleto.Vendedor.Id == cuentaUso.Id)
                                             {
-                                                frmMetodoDePago frm = new frmMetodoDePago(ObtenerPrecio(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString()), boleto);
+                                                frmMetodoDePago frm = new frmMetodoDePago(ObtenerPrecio(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString()), boleto);
                                                 if (frm.ShowDialog() == DialogResult.OK)
                                                 {
                                                     if (frm.pago != null)
@@ -509,7 +512,7 @@ namespace Sistema_final
                             {
                                 int id = Convert.ToInt32(row.Cells["ID"].Value);
                                 Boleto boleto = GetDBBoleto(db, id);
-                                Cuenta cuentaUso = frmDestinos.GetDBCuenta(db, cuenta_id);
+                                Cuenta cuentaUso = FrmDestinos.GetDBCuenta(db, cuenta_id);
                                 if (boleto != null)
                                 {
                                     if (cuentaUso != null)
@@ -577,7 +580,7 @@ namespace Sistema_final
             ActualizarDataGridView();
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                 try
                 {
                     if (v != null)
@@ -604,10 +607,10 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                 if (viaje != null)
                 {
-                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbViajeHoraSalida.SelectedItem.ToString());
+                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbViajeHoraSalida.SelectedItem?.ToString());
                     if (h != null)
                     {
                         for (int i = 0; i < clbViajeFrecuencia.Items.Count; i++)
@@ -637,10 +640,10 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                 if (viaje != null)
                 {
-                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbViajeHoraSalida.SelectedItem.ToString());
+                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbViajeHoraSalida.SelectedItem?.ToString());
                     if (h != null)
                     {
                         DrawDistribution(h.Distribucion);
@@ -652,10 +655,10 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                 if (viaje != null)
                 {
-                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbViajeHoraSalida.SelectedItem.ToString());
+                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbViajeHoraSalida.SelectedItem?.ToString());
                     if (h != null)
                     {
                         DrawDistribution(h.Distribucion);
@@ -682,17 +685,17 @@ namespace Sistema_final
         */
         public static string GetViajeOrigenNombre(Viaje viaje)
         {
-            foreach(Arco a in viaje.Arcos)
+            foreach (Arco a in viaje.Arcos)
             {
-                if(viaje.Arcos.Find(ar => ar.Destino == a.Origen) == null)
-                    return a.Origen.Nombre;   
+                if (viaje.Arcos.Find(ar => ar.Destino == a.Origen) == null)
+                    return a.Origen.Nombre;
             }
             return string.Empty;
         }
 
         public static string GetViajeDestinoNombre(Viaje viaje)
         {
-            foreach(Arco a in viaje.Arcos)
+            foreach (Arco a in viaje.Arcos)
             {
                 if (viaje.Arcos.Find(ar => ar.Origen == a.Destino) == null)
                     return a.Destino.Nombre;
@@ -703,15 +706,15 @@ namespace Sistema_final
 
         public static void MostrarSiguientes(Viaje viaje, List<string> list, string origen, string destino)
         {
-            if(viaje != null && origen != destino)
-            MostrarSiguientesR(viaje, list, origen, destino);
+            if (viaje != null && origen != destino)
+                MostrarSiguientesR(viaje, list, origen, destino);
         }
         static internal void MostrarSiguientesR(Viaje viaje, List<string> list, string origen, string destino)
         {
             Arco arco = viaje.Arcos.Find(a => a.Origen.Nombre == origen);
-            if(arco != null)
+            if (arco != null)
             {
-                if(arco.Destino.Nombre != destino)
+                if (arco.Destino.Nombre != destino)
                 {
                     list.Add(arco.Destino.Nombre);
                     MostrarSiguientesR(viaje, list, arco.Destino.Nombre, destino);
@@ -732,9 +735,9 @@ namespace Sistema_final
         static internal void ObtenerPrecioR(Viaje viaje, List<int> precio, string origen, string destino)
         {
             Arco arco = viaje.Arcos.Find(a => a.Origen.Nombre == origen);
-            if(arco != null)
+            if (arco != null)
             {
-                if(arco.Destino.Nombre != destino)
+                if (arco.Destino.Nombre != destino)
                 {
                     precio.Add(Convert.ToInt32(arco.Precio));
                     ObtenerPrecioR(viaje, precio, arco.Destino.Nombre, destino);
@@ -784,7 +787,7 @@ namespace Sistema_final
                 cbViajeTrayecto.Items.Clear();
                 cbInformeTrayecto.Items.Clear();
 
-                if (db.Viajes.Count() > 0)
+                if (db.Viajes.Any())
                 {
                     cbTrayecto.Items.AddRange((from v in db.Viajes select v.Nombre).ToArray());
                     if (cbTrayecto.SelectedIndex < 0) cbTrayecto.SelectedIndex = 0;
@@ -793,7 +796,7 @@ namespace Sistema_final
                     cbInformeTrayecto.Items.AddRange((from v in db.Viajes select v.Nombre).ToArray());
                     if (cbInformeTrayecto.SelectedIndex < 0) cbInformeTrayecto.SelectedIndex = 0;
                 }
-                Cuenta cuentaUso = frmDestinos.GetDBCuenta(db, cuenta_id);
+                Cuenta cuentaUso = FrmDestinos.GetDBCuenta(db, cuenta_id);
                 if (cuentaUso != null)
                 {
                     lblInfo.Text = "Cuenta: " + cuentaUso.Usuario + " | Cuentas: " + db.Cuentas.Count() + " | Trayectos: " + db.Viajes.Count() + " | Boletos: " + db.Boletos.Count() + " | Pagos: " + db.Pagos.Count();
@@ -855,29 +858,29 @@ namespace Sistema_final
 
         private int GetDayOfWeekIndex(DayOfWeek day)
         {
-            switch (day)
+            return day switch
             {
-                case DayOfWeek.Monday: return 0;
-                case DayOfWeek.Tuesday: return 1;
-                case DayOfWeek.Wednesday: return 2;
-                case DayOfWeek.Thursday: return 3;
-                case DayOfWeek.Friday: return 4;
-                case DayOfWeek.Saturday: return 5;
-                case DayOfWeek.Sunday: return 6;
-                default: return -1;
-            }
+                DayOfWeek.Monday => 0,
+                DayOfWeek.Tuesday => 1,
+                DayOfWeek.Wednesday => 2,
+                DayOfWeek.Thursday => 3,
+                DayOfWeek.Friday => 4,
+                DayOfWeek.Saturday => 5,
+                DayOfWeek.Sunday => 6,
+                _ => -1,
+            };
         }
         private void ActualizarInformacion()
         {
             using (EntityDataModel db = new EntityDataModel())
-            {                
+            {
                 try
                 {
-                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                     if (viaje != null)
                     {
-                        DateTime tiempo = ObtenerTiempo(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
-                        DateTime hora_ad = DateTime.Parse(cbHoraSalidaIda.SelectedItem.ToString());
+                        DateTime tiempo = ObtenerTiempo(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
+                        DateTime hora_ad = DateTime.Parse(cbHoraSalidaIda.SelectedItem?.ToString());
 
                         hora_ad = DateTime.Parse(hora_ad.Add(new TimeSpan(tiempo.Hour, tiempo.Minute, 0)).ToShortTimeString());
 
@@ -885,7 +888,7 @@ namespace Sistema_final
 
                         tbAsientoIda.Text = string.Empty;
 
-                        lblPrecio.Text = "Precio: $" + ObtenerPrecio(viaje, cbOrigen.SelectedItem.ToString(), cbDestino.SelectedItem.ToString());
+                        lblPrecio.Text = "Precio: $" + ObtenerPrecio(viaje, cbOrigen.SelectedItem?.ToString(), cbDestino.SelectedItem?.ToString());
                     }
                 }
                 catch (NullReferenceException)
@@ -902,7 +905,7 @@ namespace Sistema_final
                 cbPasDNI.AutoCompleteCustomSource.Clear();
                 cbInformePasajero.AutoCompleteCustomSource.Clear();
 
-                if(db.Clientes.Count() > 0)
+                if (db.Clientes.Any())
                 {
                     cbPasNombre.AutoCompleteCustomSource.AddRange((from c in db.Clientes select c.Nombre).ToArray());
                     cbPasDNI.AutoCompleteCustomSource.AddRange((from c in db.Clientes select c.DNI.ToString()).ToArray());
@@ -917,7 +920,7 @@ namespace Sistema_final
             using (EntityDataModel db = new EntityDataModel())
             {
 
-                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                 try
                 {
                     if (viaje != null)
@@ -973,7 +976,7 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                 if (viaje != null)
                 {
                     if (rbViajesPrecios.Checked)
@@ -1017,7 +1020,7 @@ namespace Sistema_final
                                 {
                                     if (i > 0)
                                     {
-                                        DateTime horarios = DateTime.Parse(cbViajeHoraSalida.SelectedItem.ToString());
+                                        DateTime horarios = DateTime.Parse(cbViajeHoraSalida.SelectedItem?.ToString());
                                         DateTime tiempo = ObtenerTiempo(viaje, row.Cells[0].Value.ToString(), dgvViajeTrayectos.Columns[row.Cells[i].ColumnIndex].HeaderText);
                                         horarios = DateTime.Parse(horarios.Add(new TimeSpan(tiempo.Hour, tiempo.Minute, 0)).ToShortTimeString());
                                         string valor = horarios.ToShortTimeString();
@@ -1223,7 +1226,7 @@ namespace Sistema_final
             ActualizarFiltros();
         }
 
-        private void DibujarBoletoDataGridView(Boleto b)        
+        private void DibujarBoletoDataGridView(Boleto b)
         {
             Control.CheckForIllegalCrossThreadCalls = false;
             try
@@ -1270,15 +1273,15 @@ namespace Sistema_final
 
                 }
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
 
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
 
             }
-            catch(ArgumentException)
+            catch (ArgumentException)
             {
 
             }
@@ -1309,7 +1312,7 @@ namespace Sistema_final
                             cbPasDNI.Text = c.DNI.ToString();
                         }
                     }
-                    catch(ArgumentException)
+                    catch (ArgumentException)
                     {
                         MessageBox.Show("El documento del pasajero debe tener únicamente números.", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -1332,8 +1335,8 @@ namespace Sistema_final
 
             ttInfo.UseAnimation = true;
             ttInfo.SetToolTip(gbIda, "No se pueden vender pasajes ese día.");
-           
-            foreach(Control c in gbIda.Controls)
+
+            foreach (Control c in gbIda.Controls)
             {
                 ttInfo.SetToolTip(c, "No se pueden vender pasajes ese día.");
                 c.Cursor = Cursors.No;
@@ -1366,7 +1369,7 @@ namespace Sistema_final
             {
                 using (EntityDataModel db = new EntityDataModel())
                 {
-                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbTrayecto.SelectedItem?.ToString());
                     if (viaje != null)
                     {
                         cbHoraSalidaIda.Items.Clear();
@@ -1380,7 +1383,7 @@ namespace Sistema_final
                                 if (viaje.Arcos.Count > 0)
                                 {
                                     DayOfWeek dia = dtpFechaIda.Value.DayOfWeek;
-                                    DateTime tiempo = ObtenerTiempo(viaje, GetViajeOrigenNombre(viaje), cbOrigen.SelectedItem.ToString());
+                                    DateTime tiempo = ObtenerTiempo(viaje, GetViajeOrigenNombre(viaje), cbOrigen?.SelectedItem?.ToString());
                                     DateTime horarios = DateTime.MinValue;
 
                                     if (h.Frecuencia.Cells[GetDayOfWeekIndex(dia)].Value == 1)
@@ -1395,7 +1398,7 @@ namespace Sistema_final
                                 }
                             }
                         }
-                        if(cbHoraSalidaIda.SelectedItem == null)
+                        if (cbHoraSalidaIda.SelectedItem == null)
                         {
                             if (cbHoraSalidaIda.Items.Count > 0) cbHoraSalidaIda.SelectedIndex = 0;
                         }
@@ -1419,7 +1422,7 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                Cuenta cuentaUso = frmDestinos.GetDBCuenta(db, cuenta_id);
+                Cuenta cuentaUso = FrmDestinos.GetDBCuenta(db, cuenta_id);
                 if (cuentaUso != null)
                 {
                     frmCuenta form = new frmCuenta(cuentaUso.Id);
@@ -1433,7 +1436,7 @@ namespace Sistema_final
         {
             using (EntityDataModel db = new EntityDataModel())
             {
-                frmDestinos form = new frmDestinos();
+                FrmDestinos form = new FrmDestinos();
                 if (form.ShowDialog() != DialogResult.None)
                 {
                     try
@@ -1453,7 +1456,7 @@ namespace Sistema_final
         private void editorDePasajerosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmPasaje form = new frmPasaje();
-            if(form.ShowDialog() != DialogResult.None)
+            if (form.ShowDialog() != DialogResult.None)
             {
                 ActualizarListaPasajeros();
             }
@@ -1534,7 +1537,7 @@ namespace Sistema_final
 
         private void apartadosAdministrativosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(apartadosAdministrativosToolStripMenuItem.Checked)
+            if (apartadosAdministrativosToolStripMenuItem.Checked)
             {
 
             }
@@ -1571,10 +1574,10 @@ namespace Sistema_final
             Control.CheckForIllegalCrossThreadCalls = false;
             if (!actualizando)
             {
-                actualizando = true;          
+                actualizando = true;
                 ActualizarInformacion(1, 30);
                 actualizando = false;
-                
+
             }
         }
 
@@ -1611,7 +1614,7 @@ namespace Sistema_final
                         var boletos = boletos_dibujados;
                         if (pagina > paginas || pagina <= 0) pagina = 1;
 
-                        var inicio = (pagina-1) * filasPorPagina;
+                        var inicio = (pagina - 1) * filasPorPagina;
                         if (boletos_dibujados.Count > filasPorPagina)
                         {
                             boletos = boletos_dibujados.Skip(inicio)
@@ -1622,12 +1625,12 @@ namespace Sistema_final
                         gbResultados.Text = "Resultados:  " + boletos_dibujados.Count + " encontrados.";
 
                         if (pagina > 1) btnAnterior.Enabled = true;
-                        else if(pagina == 1)
+                        else if (pagina == 1)
                         {
                             btnAnterior.Enabled = false;
                             btnPrimero.Enabled = false;
                         }
-                        if(pagina >= CalcularPaginas())
+                        if (pagina >= CalcularPaginas())
                         {
                             btnUltimo.Enabled = false;
                             btnSiguiente.Enabled = false;
@@ -1680,110 +1683,110 @@ namespace Sistema_final
 
             if (rbFiltroTodos.Checked)
             {
-                if(chbBusPasPasajeroNombre.Checked)
+                if (chbBusPasPasajeroNombre.Checked)
                 {
-                    if(cbPasBusPasajeroNombre.Text != string.Empty)
+                    if (cbPasBusPasajeroNombre.Text != string.Empty)
                     {
                         if (boletos.Count == 0) source = db.Boletos.ToList();
                         else source = boletos;
-                        frmDestinos.Boletos_LoadReferences(ref source, db);
+                        FrmDestinos.Boletos_LoadReferences(ref source, db);
                         boletos = source.Where(b => b.Pasajero.Nombre == cbPasBusPasajeroNombre.Text).ToList();
                     }
                 }
-                if(chbBusPasPasajeroDNI.Checked)
+                if (chbBusPasPasajeroDNI.Checked)
                 {
                     if (cbPasBusPasajeroDNI.Text != string.Empty)
                     {
                         if (boletos.Count == 0) source = db.Boletos.ToList();
                         else source = boletos;
-                        frmDestinos.Boletos_LoadReferences(ref source, db);
+                        FrmDestinos.Boletos_LoadReferences(ref source, db);
                         try
                         {
-                        int dni = Convert.ToInt32(cbPasBusPasajeroDNI.Text);
-                        boletos = source.Where(b => b.Pasajero.DNI == dni).ToList();
+                            int dni = Convert.ToInt32(cbPasBusPasajeroDNI.Text);
+                            boletos = source.Where(b => b.Pasajero.DNI == dni).ToList();
                         }
-                        catch(FormatException)
+                        catch (FormatException)
                         {
                             MessageBox.Show("No pudimos encontrar ese número de documento, ingresa uno válido.", "Error.", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
-                if(chbBusPasOrigen.Checked)
+                if (chbBusPasOrigen.Checked)
                 {
-                    if(cbPasBusOrigen.Text != string.Empty)
+                    if (cbPasBusOrigen.Text != string.Empty)
                     {
                         if (boletos.Count == 0) source = db.Boletos.ToList();
                         else source = boletos;
-                        frmDestinos.Boletos_LoadReferences(ref source, db);
+                        FrmDestinos.Boletos_LoadReferences(ref source, db);
                         boletos = source.Where(b => b.Origen.Nombre == cbPasBusOrigen.Text).ToList();
                     }
                 }
-                if(chbBusPasDestino.Checked)
+                if (chbBusPasDestino.Checked)
                 {
-                    if(cbBusPasDestino.Text != string.Empty)
+                    if (cbBusPasDestino.Text != string.Empty)
                     {
                         if (boletos.Count == 0) source = db.Boletos.ToList();
                         else source = boletos;
-                        frmDestinos.Boletos_LoadReferences(ref source, db);
+                        FrmDestinos.Boletos_LoadReferences(ref source, db);
                         boletos = source.Where(b => b.Destino.Nombre == cbBusPasDestino.Text).ToList();
                     }
                 }
-                if(chbBusPasFecha.Checked)
+                if (chbBusPasFecha.Checked)
                 {
                     if (boletos.Count == 0) source = db.Boletos.ToList();
                     else source = boletos;
-                    frmDestinos.Boletos_LoadReferences(ref source, db);
+                    FrmDestinos.Boletos_LoadReferences(ref source, db);
                     boletos = source.Where(b => b.Fecha.Day == dtpBusPasFecha.Value.Day && b.Fecha.Month == dtpBusPasFecha.Value.Month && b.Fecha.Year == dtpBusPasFecha.Value.Year).ToList();
                 }
 
-               /*
-                if (cbBuscarPasajes.Text != string.Empty)
-                {
-                    foreach (Control c in gbBuscarPasaje.Controls)
-                    {
-                        if (c is RadioButton && (c as RadioButton).Checked)
-                        {
-                            if (c.Tag != null)
-                            {
-                                switch (c.Tag.ToString())
-                                {
-                                    case "pasajero":
-                                        boletos = db.Boletos.Where(b => b.Pasajero.Nombre == cbBuscarPasajes.SelectedText).ToList();
-                                        break;
-                                    case "dni":
-                                        boletos = db.Boletos.Where(b => b.Pasajero.DNI.ToString() == cbBuscarPasajes.SelectedText).ToList();
-                                        break;
-                                    case "origen":
-                                        boletos = db.Boletos.Where(b => b.Origen.Nombre == cbBuscarPasajes.SelectedText).ToList();
-                                        break;
-                                    case "destino":
-                                        boletos = db.Boletos.Where(b => b.Destino.Nombre == cbBuscarPasajes.SelectedText).ToList();
-                                        break;
-                                    case "fecha":
-                                        try
-                                        {
-                                            DateTime fecha_boleto = DateTime.Parse(cbBuscarPasajes.SelectedText);
+                /*
+                 if (cbBuscarPasajes.Text != string.Empty)
+                 {
+                     foreach (Control c in gbBuscarPasaje.Controls)
+                     {
+                         if (c is RadioButton && (c as RadioButton).Checked)
+                         {
+                             if (c.Tag != null)
+                             {
+                                 switch (c.Tag.ToString())
+                                 {
+                                     case "pasajero":
+                                         boletos = db.Boletos.Where(b => b.Pasajero.Nombre == cbBuscarPasajes.SelectedText).ToList();
+                                         break;
+                                     case "dni":
+                                         boletos = db.Boletos.Where(b => b.Pasajero.DNI.ToString() == cbBuscarPasajes.SelectedText).ToList();
+                                         break;
+                                     case "origen":
+                                         boletos = db.Boletos.Where(b => b.Origen.Nombre == cbBuscarPasajes.SelectedText).ToList();
+                                         break;
+                                     case "destino":
+                                         boletos = db.Boletos.Where(b => b.Destino.Nombre == cbBuscarPasajes.SelectedText).ToList();
+                                         break;
+                                     case "fecha":
+                                         try
+                                         {
+                                             DateTime fecha_boleto = DateTime.Parse(cbBuscarPasajes.SelectedText);
 
-                                            boletos = db.Boletos.Where(b => b.Fecha.Year == fecha_boleto.Year && b.Fecha.Month == fecha_boleto.Month && b.Fecha.Day == fecha_boleto.Day).ToList();
-                                        }
-                                        catch (FormatException)
-                                        {
-                                            MessageBox.Show("La fecha introducida es inválida. " + Environment.NewLine + "Formato de fecha: DD/MM/AAAA. Ejemplo: 25/07/2000", "Error en la búsqueda.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                        break;
-                                }
-                            }
-                        }
-                    }            
-                }*/
+                                             boletos = db.Boletos.Where(b => b.Fecha.Year == fecha_boleto.Year && b.Fecha.Month == fecha_boleto.Month && b.Fecha.Day == fecha_boleto.Day).ToList();
+                                         }
+                                         catch (FormatException)
+                                         {
+                                             MessageBox.Show("La fecha introducida es inválida. " + Environment.NewLine + "Formato de fecha: DD/MM/AAAA. Ejemplo: 25/07/2000", "Error en la búsqueda.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                         }
+                                         break;
+                                 }
+                             }
+                         }
+                     }            
+                 }*/
 
             }
             else if (rbFiltrosRecorrido.Checked)
             {
-                if(cbTrayecto.SelectedItem != null)
+                if (cbTrayecto.SelectedItem != null)
                 {
-                string recorrido = cbTrayecto.SelectedItem.ToString();
-                boletos = db.Boletos.Where(b => b.Recorrido.Nombre == recorrido).OrderByDescending(b => b.ID).ToList();
+                    string recorrido = cbTrayecto.SelectedItem?.ToString();
+                    boletos = db.Boletos.Where(b => b.Recorrido.Nombre == recorrido).OrderByDescending(b => b.ID).ToList();
                 }
             }
             else if (rbFiltrosDiaHoy.Checked)
@@ -1816,7 +1819,7 @@ namespace Sistema_final
 
         private void chbBusPasPasajeroNombre_CheckedChanged(object sender, EventArgs e)
         {
-            if(chbBusPasPasajeroNombre.Checked)
+            if (chbBusPasPasajeroNombre.Checked)
             {
                 cbPasBusPasajeroNombre.Enabled = true;
                 using (EntityDataModel db = new EntityDataModel())
@@ -1834,13 +1837,13 @@ namespace Sistema_final
 
         private void chbBusPasPasajeroDNI_CheckedChanged(object sender, EventArgs e)
         {
-            if(chbBusPasPasajeroDNI.Checked)
+            if (chbBusPasPasajeroDNI.Checked)
             {
                 cbPasBusPasajeroDNI.Enabled = true;
                 using (EntityDataModel db = new EntityDataModel())
                 {
-                cbPasBusPasajeroDNI.AutoCompleteCustomSource.Clear();
-                cbPasBusPasajeroDNI.AutoCompleteCustomSource.AddRange((from c in db.Clientes select c.DNI.ToString()).ToArray());
+                    cbPasBusPasajeroDNI.AutoCompleteCustomSource.Clear();
+                    cbPasBusPasajeroDNI.AutoCompleteCustomSource.AddRange((from c in db.Clientes select c.DNI.ToString()).ToArray());
                 }
             }
             else
@@ -1870,7 +1873,7 @@ namespace Sistema_final
 
         private void chbBusPasDestino_CheckedChanged(object sender, EventArgs e)
         {
-            if(chbBusPasDestino.Checked)
+            if (chbBusPasDestino.Checked)
             {
                 cbBusPasDestino.Enabled = true;
                 using (EntityDataModel db = new EntityDataModel())
@@ -1888,7 +1891,7 @@ namespace Sistema_final
 
         private void chbBusPasFecha_CheckedChanged(object sender, EventArgs e)
         {
-            if(chbBusPasFecha.Checked)
+            if (chbBusPasFecha.Checked)
             {
                 dtpBusPasFecha.Enabled = true;
             }
@@ -1908,7 +1911,7 @@ namespace Sistema_final
         {
             pagina++;
             ActualizarFiltros();
-            if(pagina >= CalcularPaginas())
+            if (pagina >= CalcularPaginas())
             {
                 btnSiguiente.Enabled = false;
                 btnUltimo.Enabled = false;
@@ -1931,7 +1934,7 @@ namespace Sistema_final
             {
                 btnAnterior.Enabled = false;
                 btnPrimero.Enabled = false;
-                if(CalcularPaginas() > 1)
+                if (CalcularPaginas() > 1)
                 {
                     btnSiguiente.Enabled = true;
                     btnUltimo.Enabled = true;
@@ -1951,7 +1954,7 @@ namespace Sistema_final
             btnSiguiente.Enabled = false;
             btnUltimo.Enabled = false;
             ActualizarFiltros();
-            if(CalcularPaginas() > 1)
+            if (CalcularPaginas() > 1)
             {
                 btnAnterior.Enabled = true;
                 btnPrimero.Enabled = true;
@@ -1963,7 +1966,7 @@ namespace Sistema_final
             pagina = 1;
             btnPrimero.Enabled = false;
             btnAnterior.Enabled = false;
-            if(CalcularPaginas() > 1)
+            if (CalcularPaginas() > 1)
             {
                 btnSiguiente.Enabled = true;
                 btnUltimo.Enabled = true;
@@ -1973,6 +1976,7 @@ namespace Sistema_final
 
         private void btnInforme_Click(object sender, EventArgs e)
         {
+            /*
             try
             {
                 using (EntityDataModel db = new EntityDataModel())
@@ -1980,7 +1984,7 @@ namespace Sistema_final
                     if (rbInformeRecorrido.Checked)
                     {
 
-                        Viaje viaje = GetDBViaje(db, cbInformeTrayecto.SelectedItem.ToString());
+                        Viaje viaje = GetDBViaje(db, cbInformeTrayecto.SelectedItem?.ToString());
                         if (viaje != null)
                         {
                             frmReporteBoletos frmReporte = new frmReporteBoletos(viaje.Nombre);
@@ -2003,7 +2007,7 @@ namespace Sistema_final
             catch (NullReferenceException)
             {
                 MessageBox.Show("No se encontró información con esos datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
         private void tpReportes_Click(object sender, EventArgs e)

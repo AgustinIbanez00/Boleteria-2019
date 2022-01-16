@@ -1,4 +1,4 @@
-﻿namespace Sistema_final
+﻿namespace Boleteria
 {
     partial class frmPrincipal
     {
@@ -210,7 +210,7 @@
             // 
             // verInfoItem
             // 
-            this.verInfoItem.Image = global::Sistema_final.Properties.Resources.nuevo1;
+            this.verInfoItem.Image = global::Boleteria.Properties.Resources.nuevo1;
             this.verInfoItem.Name = "verInfoItem";
             this.verInfoItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.verInfoItem.Size = new System.Drawing.Size(139, 22);
@@ -226,7 +226,7 @@
             // 
             // venderItem
             // 
-            this.venderItem.Image = global::Sistema_final.Properties.Resources.carrito;
+            this.venderItem.Image = global::Boleteria.Properties.Resources.carrito;
             this.venderItem.Name = "venderItem";
             this.venderItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.venderItem.Size = new System.Drawing.Size(139, 22);
@@ -235,7 +235,7 @@
             // 
             // cancelarItem
             // 
-            this.cancelarItem.Image = global::Sistema_final.Properties.Resources.borrar;
+            this.cancelarItem.Image = global::Boleteria.Properties.Resources.borrar;
             this.cancelarItem.Name = "cancelarItem";
             this.cancelarItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
             this.cancelarItem.Size = new System.Drawing.Size(139, 22);
@@ -270,7 +270,7 @@
             // 
             this.btnPerfil.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPerfil.AutoSize = true;
-            this.btnPerfil.BackgroundImage = global::Sistema_final.Properties.Resources.usuario_hombre;
+            this.btnPerfil.BackgroundImage = global::Boleteria.Properties.Resources.usuario_hombre;
             this.btnPerfil.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPerfil.FlatAppearance.BorderSize = 10;
             this.btnPerfil.Location = new System.Drawing.Point(1019, 12);
@@ -646,7 +646,7 @@
             // 
             this.btnMasAsientosVuelta.AutoSize = true;
             this.btnMasAsientosVuelta.BackColor = System.Drawing.Color.Transparent;
-            this.btnMasAsientosVuelta.BackgroundImage = global::Sistema_final.Properties.Resources.agregar1;
+            this.btnMasAsientosVuelta.BackgroundImage = global::Boleteria.Properties.Resources.agregar1;
             this.btnMasAsientosVuelta.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMasAsientosVuelta.Location = new System.Drawing.Point(132, 51);
             this.btnMasAsientosVuelta.Name = "btnMasAsientosVuelta";
@@ -763,7 +763,7 @@
             // 
             this.btnMasAsientosIda.AutoSize = true;
             this.btnMasAsientosIda.BackColor = System.Drawing.Color.Transparent;
-            this.btnMasAsientosIda.BackgroundImage = global::Sistema_final.Properties.Resources.agregar1;
+            this.btnMasAsientosIda.BackgroundImage = global::Boleteria.Properties.Resources.agregar1;
             this.btnMasAsientosIda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMasAsientosIda.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasAsientosIda.Location = new System.Drawing.Point(132, 51);
@@ -1099,7 +1099,7 @@
             // 
             this.btnBuscarPasajeros.AutoSize = true;
             this.btnBuscarPasajeros.BackColor = System.Drawing.Color.Transparent;
-            this.btnBuscarPasajeros.BackgroundImage = global::Sistema_final.Properties.Resources._698873_icon_136_document_edit_512;
+            this.btnBuscarPasajeros.BackgroundImage = global::Boleteria.Properties.Resources._698873_icon_136_document_edit_512;
             this.btnBuscarPasajeros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnBuscarPasajeros.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBuscarPasajeros.Location = new System.Drawing.Point(443, 19);
@@ -1114,7 +1114,7 @@
             // 
             this.btnMasPasajeros.AutoSize = true;
             this.btnMasPasajeros.BackColor = System.Drawing.Color.Transparent;
-            this.btnMasPasajeros.BackgroundImage = global::Sistema_final.Properties.Resources.agregar1;
+            this.btnMasPasajeros.BackgroundImage = global::Boleteria.Properties.Resources.agregar1;
             this.btnMasPasajeros.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMasPasajeros.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasPasajeros.Location = new System.Drawing.Point(472, 19);
@@ -1181,7 +1181,7 @@
             // btnMasOrigen
             // 
             this.btnMasOrigen.AutoSize = true;
-            this.btnMasOrigen.BackgroundImage = global::Sistema_final.Properties.Resources.edit;
+            this.btnMasOrigen.BackgroundImage = global::Boleteria.Properties.Resources.edit;
             this.btnMasOrigen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMasOrigen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMasOrigen.Location = new System.Drawing.Point(943, 45);
@@ -1662,7 +1662,7 @@
             this.abrirFuenteDeDatosToolStripMenuItem,
             this.toolStripSeparator1,
             this.salirToolStripMenuItem});
-            this.archivoToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.borrar1;
+            this.archivoToolStripMenuItem.Image = global::Boleteria.Properties.Resources.borrar1;
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
@@ -1689,7 +1689,7 @@
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.apartadosAdministrativosToolStripMenuItem,
             this.boletosToolStripMenuItem});
-            this.verToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.tarjeta;
+            this.verToolStripMenuItem.Image = global::Boleteria.Properties.Resources.tarjeta;
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
             this.verToolStripMenuItem.Size = new System.Drawing.Size(51, 20);
             this.verToolStripMenuItem.Text = "Ver";
@@ -1714,14 +1714,14 @@
             this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editorDeRecorridosToolStripMenuItem,
             this.editorDePasajerosToolStripMenuItem});
-            this.herramientasToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.herramientas;
+            this.herramientasToolStripMenuItem.Image = global::Boleteria.Properties.Resources.herramientas;
             this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
             this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
             this.herramientasToolStripMenuItem.Text = "Herramientas";
             // 
             // editorDeRecorridosToolStripMenuItem
             // 
-            this.editorDeRecorridosToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.rango;
+            this.editorDeRecorridosToolStripMenuItem.Image = global::Boleteria.Properties.Resources.rango;
             this.editorDeRecorridosToolStripMenuItem.Name = "editorDeRecorridosToolStripMenuItem";
             this.editorDeRecorridosToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.editorDeRecorridosToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
@@ -1730,7 +1730,7 @@
             // 
             // editorDePasajerosToolStripMenuItem
             // 
-            this.editorDePasajerosToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.inventario;
+            this.editorDePasajerosToolStripMenuItem.Image = global::Boleteria.Properties.Resources.inventario;
             this.editorDePasajerosToolStripMenuItem.Name = "editorDePasajerosToolStripMenuItem";
             this.editorDePasajerosToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.editorDePasajerosToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
@@ -1742,7 +1742,7 @@
             this.configuracionesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cambiarDirectorioPrincipalToolStripMenuItem,
             this.idaYVueltaToolStripMenuItem});
-            this.configuracionesToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.configuracion_16;
+            this.configuracionesToolStripMenuItem.Image = global::Boleteria.Properties.Resources.configuracion_16;
             this.configuracionesToolStripMenuItem.Name = "configuracionesToolStripMenuItem";
             this.configuracionesToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
             this.configuracionesToolStripMenuItem.Text = "Configuraciones";
@@ -1765,14 +1765,14 @@
             // 
             this.ayudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.verLaAyudaToolStripMenuItem});
-            this.ayudaToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.info;
+            this.ayudaToolStripMenuItem.Image = global::Boleteria.Properties.Resources.info;
             this.ayudaToolStripMenuItem.Name = "ayudaToolStripMenuItem";
             this.ayudaToolStripMenuItem.Size = new System.Drawing.Size(69, 20);
             this.ayudaToolStripMenuItem.Text = "Ayuda";
             // 
             // verLaAyudaToolStripMenuItem
             // 
-            this.verLaAyudaToolStripMenuItem.Image = global::Sistema_final.Properties.Resources.assist;
+            this.verLaAyudaToolStripMenuItem.Image = global::Boleteria.Properties.Resources.assist;
             this.verLaAyudaToolStripMenuItem.Name = "verLaAyudaToolStripMenuItem";
             this.verLaAyudaToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.verLaAyudaToolStripMenuItem.Text = "Ver la ayuda";

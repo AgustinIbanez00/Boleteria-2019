@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Models;
+using Boleteria.Models;
 
-namespace Sistema_final
+namespace Boleteria
 {
     public partial class frmMetodoDePago : Form
     {
@@ -149,7 +150,7 @@ namespace Sistema_final
                                             }
                                         }
                                         string tarjeta = "Ninguna";
-                                        if(cbTarjeta.SelectedItem != null) tarjeta = cbTarjeta.SelectedItem.ToString();
+                                        if(cbTarjeta.SelectedItem != null) tarjeta = cbTarjeta.SelectedItem?.ToString();
                                         long dni = 0;
                                         if (tbDNI.Text != string.Empty) Convert.ToInt64(tbDNI.Text);
                                         long nro_tarjeta = 0;

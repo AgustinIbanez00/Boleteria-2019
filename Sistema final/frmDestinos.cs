@@ -1,47 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using Sistema_final.Models;
+using Boleteria.Core.Models;
+using Boleteria.Models;
+using Geocoding;
+using Geocoding.Google;
 using GMap.NET;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
-using Geocoding.Google;
-using Geocoding;
 
-namespace Sistema_final
+namespace Boleteria
 {
-    public partial class frmDestinos : Form
+    public partial class FrmDestinos : Form
     {
         Distribucion distribucion;
 
         PointLatLng punto_temp = PointLatLng.Empty;
-        const int ESTADO_NULO = 0;
-        const int ESTADO_CREANDO = 1;
         const int ESTADO_EDITANDO_C = 2;
         const int ESTADO_EDITANDO = 3;
 
         GMarkerGoogle marker;
-        GMapOverlay markerOverlay = new GMapOverlay("Marcador");
-        GMapOverlay mOverlayViaje = new GMapOverlay("Viajes");
-        GMapOverlay mOverlayRutas = new GMapOverlay("Rutas");
+        readonly GMapOverlay markerOverlay = new("Marcador");
+        readonly GMapOverlay mOverlayViaje = new("Viajes");
+        readonly GMapOverlay mOverlayRutas = new("Rutas");
 
         int estado;
         int count_tick = 0;
         bool time_wait = false;
         IEnumerable<Address> addresses;
 
-        public frmDestinos()
+        public FrmDestinos()
         {
             InitializeComponent();
         }
-        private void frmDestinos_Load(object sender, EventArgs e)
+        private void FrmDestinos_Load(object sender, EventArgs e)
         {
-            GMapProviders.GoogleMap.ApiKey = "AIzaSyBJXrCouc2VRaL1NU7dH2gkDZECVWYZtUE";
+            GMapProviders.GoogleMap.ApiKey = Program.Configuration["Google-Api-Key"];
             GMaps.Instance.Mode = AccessMode.ServerAndCache;
             gMPMapa.CacheLocation = @"cache";
 
@@ -79,7 +77,7 @@ namespace Sistema_final
 
 
         }
-        private void btnCrearD_Click(object sender, EventArgs e)
+        private void BtnCrearD_Click(object sender, EventArgs e)
         {
             if (tbNombre.Text != string.Empty)
             {
@@ -91,7 +89,7 @@ namespace Sistema_final
                     {
                         if(addresses != null)
                         {
-                            if(addresses.Count() > 0)
+                            if(addresses.Any())
                             {
                                 Address address = addresses.FirstOrDefault(ad => ad.FormattedAddress == tbNombre.Text);
                                 if(address != null)
@@ -120,10 +118,7 @@ namespace Sistema_final
             else MessageBox.Show("El destino debe tener un nombre.", "Error de sintaxis", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
-        private void btnUbicacion_Click(object sender, EventArgs e)
-        {
 
-        }
         private void pnlMapa_MouseMove(object sender, MouseEventArgs e)
         {
             switch (estado)
@@ -154,7 +149,7 @@ namespace Sistema_final
         }
         private void tbLugarNombre_TextChanged(object sender, EventArgs e)
         {
-            if (tbLugarNombre.Text != cbLugar.SelectedItem.ToString())
+            if (tbLugarNombre.Text != cbLugar.SelectedItem?.ToString())
             {
                 btnLugarGuardar.Enabled = true;
             }
@@ -226,15 +221,15 @@ namespace Sistema_final
                 {
                     case 0:
                         if (rbViajeModificar.Checked || rbViajeEliminar.Checked)
-                            text = cbViajeTrayecto.SelectedItem.ToString();
+                            text = cbViajeTrayecto.SelectedItem?.ToString();
                         else
-                            text = cbConexTrayecto.SelectedItem.ToString();
+                            text = cbConexTrayecto.SelectedItem?.ToString();
                         break;
                     case 1:
-                        text = cbHorTrayecto.SelectedItem.ToString();
+                        text = cbHorTrayecto.SelectedItem?.ToString();
                         break;
                     case 2:
-                        text = cbDestinosTrayecto.SelectedItem.ToString();
+                        text = cbDestinosTrayecto.SelectedItem?.ToString();
                         break;
                     default:
                         break;
@@ -261,7 +256,7 @@ namespace Sistema_final
             {
                 try
                 {
-                    Viaje viaje = GetDBViaje(db, cbDestinosTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbDestinosTrayecto.SelectedItem?.ToString());
                     int count = 0;
                     if (viaje != null)
                     {
@@ -295,7 +290,7 @@ namespace Sistema_final
                     {
                         if (cbViajeDistribucion.SelectedItem != null)
                         {
-                            if (cbViajeDistribucion.SelectedItem.ToString() != string.Empty)
+                            if (cbViajeDistribucion.SelectedItem?.ToString() != string.Empty)
                             {
                                 if (tbViajeNombre.Text != string.Empty && !db.Viajes.ToList().Exists(v => v.Nombre == tbViajeNombre.Text))
                                 {
@@ -307,15 +302,15 @@ namespace Sistema_final
                                            
                                             if (viaje == null)
                                             {
-                                                Distribucion d = GetDBDistribucion(db, cbViajeDistribucion.SelectedItem.ToString());
+                                                Distribucion d = GetDBDistribucion(db, cbViajeDistribucion.SelectedItem?.ToString());
                                                 if (d != null)
                                                 {
                                                     Fila frecuencia = new Fila();
                                                     frecuencia.Cells = new List<Celda>();
-                                                    for (int i = 0; i < 7; i++) frecuencia.Cells.Add(new Celda() { Value = 0, Fecha_registro = DateTime.Now });
+                                                    for (int i = 0; i < 7; i++) frecuencia.Cells.Add(new Celda() { Value = 0, FechaRegistro = DateTime.Now });
                                                     for (int i = 0; i < clbViajeFrecuencia.CheckedItems.Count; i++) frecuencia.Cells[clbViajeFrecuencia.CheckedIndices[i]].Value = 1;
 
-                                                    Viaje vi = new Viaje(tbViajeNombre.Text);
+                                                    Viaje vi = new(tbViajeNombre.Text);
                                                     vi.Horarios = new List<Horario>();
                                                     vi.Horarios.Add(new Horario() { Hora = dtpViajeHoraSalida.Value.ToShortTimeString(), Frecuencia = frecuencia, Distribucion = d });
                                                     vi.Arcos = new List<Arco>();
@@ -354,7 +349,7 @@ namespace Sistema_final
                 {
                     try
                     {
-                        Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                        Viaje viaje = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                         if (viaje != null)
                         {
                             if (!db.Viajes.ToList().Exists(viaje_t => viaje_t.Nombre == tbViajeNombre.Text && viaje_t != viaje))
@@ -394,7 +389,7 @@ namespace Sistema_final
                     {
                         try
                         {
-                            Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                            Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                             if (v != null)
                             {
                                 db.Viajes.Remove(v);
@@ -459,7 +454,7 @@ namespace Sistema_final
                         }
                         btnViajeCrear.Text = "Modificar";
 
-                        Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                        Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                         if (v != null)
                         {
                             if (cbViajeTrayecto.Items.Count > 0) cbViajeTrayecto.SelectedIndex = cbViajeTrayecto.SelectedIndex;
@@ -518,7 +513,7 @@ namespace Sistema_final
             {
                 try
                 {
-                    Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem.ToString());
+                    Viaje v = GetDBViaje(db, cbViajeTrayecto.SelectedItem?.ToString());
                     if (v != null)
                     {
                         if (rbViajeModificar.Checked) tbViajeNombre.Text = v.Nombre;
@@ -599,10 +594,10 @@ namespace Sistema_final
                 {
                     try
                     {
-                        Viaje viaje = GetDBViaje(db, cbHorTrayecto.SelectedItem.ToString());
+                        Viaje viaje = GetDBViaje(db, cbHorTrayecto.SelectedItem?.ToString());
                         if (viaje != null)
                         {
-                            Horario h = viaje.Horarios.Find(horario => horario.Hora == cbHorHorarios.SelectedItem.ToString());
+                            Horario h = viaje.Horarios.Find(horario => horario.Hora == cbHorHorarios.SelectedItem?.ToString());
                             if (h != null)
                             {
                                 dtpHorHora.Value = DateTime.Parse(h.Hora);
@@ -627,7 +622,7 @@ namespace Sistema_final
             {
                 try
                 {
-                    Viaje viaje = GetDBViaje(db, cbConexTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbConexTrayecto.SelectedItem?.ToString());
                     if (viaje != null)
                     {
                         cbConexConexion.Items.Clear();
@@ -653,10 +648,10 @@ namespace Sistema_final
                 {
                     try
                     {
-                        Viaje viaje = GetDBViaje(db, cbConexTrayecto.SelectedItem.ToString());
+                        Viaje viaje = GetDBViaje(db, cbConexTrayecto.SelectedItem?.ToString());
                         if (viaje != null)
                         {
-                            string[] conexion = cbConexConexion.SelectedItem.ToString().Split(new[] { " - " }, StringSplitOptions.None);
+                            string[] conexion = cbConexConexion.SelectedItem?.ToString().Split(new[] { " - " }, StringSplitOptions.None);
                             string origen = conexion[0];
                             string destino = conexion[1];
                             cbConexOrigen.SelectedIndex = cbConexOrigen.Items.IndexOf(origen);
@@ -687,7 +682,7 @@ namespace Sistema_final
             {
                 if (cbHorTrayecto.SelectedItem != null)
                 {
-                    Viaje viaje = GetDBViaje(db, cbHorTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbHorTrayecto.SelectedItem?.ToString());
                     if (viaje != null)
                     {
                         if (rbHorCrear.Checked)
@@ -698,20 +693,20 @@ namespace Sistema_final
                                 {
                                     if (cbHorDistr.SelectedItem != null)
                                     {
-                                        if (cbHorDistr.SelectedItem.ToString() != string.Empty)
+                                        if (cbHorDistr.SelectedItem?.ToString() != string.Empty)
                                         {
                                             if (!viaje.Horarios.Exists(horario => horario.Hora == dtpHorHora.Value.ToShortTimeString()))
                                             {
                                                 Fila frecuencia = new Fila();
                                                 frecuencia.Cells = new List<Celda>();
-                                                for (int i = 0; i < 7; i++) frecuencia.Cells.Add(new Celda() { Value = 0, Fecha_registro = DateTime.Now });
+                                                for (int i = 0; i < 7; i++) frecuencia.Cells.Add(new Celda() { Value = 0, FechaRegistro = DateTime.Now });
 
                                                 for (int i = 0; i < clbHorFrecuencia.CheckedItems.Count; i++)
                                                 {
                                                     frecuencia.Cells[clbHorFrecuencia.CheckedIndices[i]].Value = 1;
                                                 }
 
-                                                Distribucion d = GetDBDistribucion(db, cbHorDistr.SelectedItem.ToString());
+                                                Distribucion d = GetDBDistribucion(db, cbHorDistr.SelectedItem?.ToString());
                                                 if (d != null)
                                                 {
                                                     viaje.Horarios.Add(new Horario() { Frecuencia = frecuencia, Distribucion = d, Hora = dtpHorHora.Value.ToShortTimeString() });
@@ -738,14 +733,14 @@ namespace Sistema_final
                                 {
                                     if (cbHorDistr.SelectedItem != null)
                                     {
-                                        if (cbHorDistr.SelectedItem.ToString() != string.Empty)
+                                        if (cbHorDistr.SelectedItem?.ToString() != string.Empty)
                                         {
                                             try
                                             {
-                                                Horario h = viaje.Horarios.Find(horario => horario.Hora == cbHorHorarios.SelectedItem.ToString());
+                                                Horario h = viaje.Horarios.Find(horario => horario.Hora == cbHorHorarios.SelectedItem?.ToString());
                                                 if (h != null)
                                                 {
-                                                    Distribucion d = GetDBDistribucion(db, cbHorDistr.SelectedItem.ToString());
+                                                    Distribucion d = GetDBDistribucion(db, cbHorDistr.SelectedItem?.ToString());
                                                     for (int i = 0; i < 7; i++) h.Frecuencia.Cells[i].Value = 0;
                                                     for (int i = 0; i < clbHorFrecuencia.CheckedItems.Count; i++) h.Frecuencia.Cells[clbHorFrecuencia.CheckedIndices[i]].Value = 1;
 
@@ -778,9 +773,9 @@ namespace Sistema_final
                         {
                             if (cbHorHorarios.SelectedItem != null)
                             {
-                                if (cbHorHorarios.SelectedItem.ToString() != string.Empty)
+                                if (cbHorHorarios.SelectedItem?.ToString() != string.Empty)
                                 {
-                                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbHorHorarios.SelectedItem.ToString());
+                                    Horario h = viaje.Horarios.Find(horario => horario.Hora == cbHorHorarios.SelectedItem?.ToString());
                                     if (h != null)
                                     {
                                         if (MessageBox.Show("Eliminar horarios puede provocar errores en los boletos que se hayan creado con ese horario." + Environment.NewLine + "¿Está seguro que quiere eliminar este horario?" + Environment.NewLine + Environment.NewLine + "Esta acción no se puede deshacer.", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -938,11 +933,13 @@ namespace Sistema_final
                             if (GetDBDistribucion(db, tbNota.Text) == null)
                             {
                                 distribucion.Nota = tbNota.Text;
-                                Distribucion d = new Distribucion();
-                                d.Nota = tbNota.Text;
-                                d.UnPiso = distribucion.UnPiso;
-                                d.Matriz_PA = new List<Fila>();
-                                d.Matriz_PB = new List<Fila>();
+                                Distribucion d = new()
+                                {
+                                    Nota = tbNota.Text,
+                                    UnPiso = distribucion.UnPiso,
+                                    Matriz_PA = new List<Fila>(),
+                                    Matriz_PB = new List<Fila>()
+                                };
 
                                 d.Matriz_PB.Clear();
                                 d.AddRowCells("PB", distribucion.Matriz_PB.Count);
@@ -986,10 +983,10 @@ namespace Sistema_final
                 }
                 else if (rbDistrMod.Checked)
                 {
-                    Distribucion d = GetDBDistribucion(db, cbDistrDistribucion.SelectedItem.ToString());
+                    Distribucion d = GetDBDistribucion(db, cbDistrDistribucion.SelectedItem?.ToString());
                     if (d != null)
                     {
-                        if (db.Distribuciones.Count(distr => distr.Nota == tbNota.Text && distr.Id != d.Id) <= 0)
+                        if (!db.Distribuciones.Any(distr => distr.Nota == tbNota.Text && distr.Id != d.Id))
                         {
                             distribucion.Nota = tbNota.Text;
                             if (cbDistrPisos.SelectedIndex == 0) distribucion.UnPiso = true;
@@ -1073,7 +1070,7 @@ namespace Sistema_final
             {
                 using (EntityDataModel db = new EntityDataModel())
                 {
-                    Distribucion d = GetDBDistribucion(db, cbDistrDistribucion.SelectedItem.ToString());
+                    Distribucion d = GetDBDistribucion(db, cbDistrDistribucion.SelectedItem?.ToString());
                     if (d != null)
                     {
                         distribucion.Nota = d.Nota;
@@ -1104,17 +1101,17 @@ namespace Sistema_final
 
         private string GetDayStringFromIndex(int i)
         {
-            switch (i)
+            return i switch
             {
-                case 0: return "Lun";
-                case 1: return "Mar";
-                case 2: return "Mie";
-                case 3: return "Jue";
-                case 4: return "Vie";
-                case 5: return "Sab";
-                case 6: return " Dom";
-                default: return "Error.";
-            }
+                0 => "Lun",
+                1 => "Mar",
+                2 => "Mie",
+                3 => "Jue",
+                4 => "Vie",
+                5 => "Sab",
+                6 => " Dom",
+                _ => "Error.",
+            };
         }
         /*
         private Distribucion CurrentDistribucion(string text)
@@ -1132,7 +1129,7 @@ namespace Sistema_final
             {
                 try
                 {
-                    Viaje viaje = GetDBViaje(db, cbDestinosTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbDestinosTrayecto.SelectedItem?.ToString());
                     dgvConexiones.Rows.Clear();
                     if (viaje != null)
                     {
@@ -1441,28 +1438,38 @@ namespace Sistema_final
                         switch (distribucion.GetCellContent(matriz_name, i, j))
                         {
                             case ESPACIO_BUTACA:
-                                c = new DataGridViewButtonCell();
-                                c.Tag = "A";
+                                c = new DataGridViewButtonCell
+                                {
+                                    Tag = "A"
+                                };
                                 dgvAsientos.Rows[i].Cells[j] = c;
                                 break;
                             case ESPACIO_PASILLO:
-                                c = new DataGridViewButtonCell();
-                                c.Tag = "P";
+                                c = new DataGridViewButtonCell
+                                {
+                                    Tag = "P"
+                                };
                                 dgvAsientos.Rows[i].Cells[j] = c;
                                 break;
                             case ESPACIO_TV:
-                                c = new DataGridViewButtonCell();
-                                c.Tag = "T";
+                                c = new DataGridViewButtonCell
+                                {
+                                    Tag = "T"
+                                };
                                 dgvAsientos.Rows[i].Cells[j] = c;
                                 break;
                             case ESPACIO_NULL:
-                                c = new DataGridViewButtonCell();
-                                c.Tag = "N";
+                                c = new DataGridViewButtonCell
+                                {
+                                    Tag = "N"
+                                };
                                 dgvAsientos.Rows[i].Cells[j] = c;
                                 break;
                             default:
-                                c = new DataGridViewButtonCell();
-                                c.Tag = "E";
+                                c = new DataGridViewButtonCell
+                                {
+                                    Tag = "E"
+                                };
                                 dgvAsientos.Rows[i].Cells[j] = c;
                                 break;
                         }
@@ -1492,10 +1499,10 @@ namespace Sistema_final
                 {
                     using (EntityDataModel db = new EntityDataModel())
                     {
-                        Viaje viaje = GetDBViaje(db, cbConexTrayecto.SelectedItem.ToString());
+                        Viaje viaje = GetDBViaje(db, cbConexTrayecto.SelectedItem?.ToString());
                         try
                         {
-                            if (cbConexTrayecto.SelectedItem.ToString() != string.Empty)
+                            if (cbConexTrayecto.SelectedItem?.ToString() != string.Empty)
                             {
                                 if (!cbConexOrigen.SelectedItem.Equals(cbConexDestino.SelectedItem))
                                 {
@@ -1503,10 +1510,10 @@ namespace Sistema_final
                                     {
                                         if (viaje != null)
                                         {
-                                            if (!viaje.Arcos.Exists(a => a.Origen.Nombre == cbConexOrigen.SelectedItem.ToString() && a.Destino.Nombre == cbConexDestino.SelectedItem.ToString()))
+                                            if (!viaje.Arcos.Exists(a => a.Origen.Nombre == cbConexOrigen.SelectedItem?.ToString() && a.Destino.Nombre == cbConexDestino.SelectedItem?.ToString()))
                                             {
-                                                Destino origen = GetDBDestino(db, cbConexOrigen.SelectedItem.ToString());
-                                                Destino destino = GetDBDestino(db, cbConexDestino.SelectedItem.ToString());
+                                                Destino origen = GetDBDestino(db, cbConexOrigen.SelectedItem?.ToString());
+                                                Destino destino = GetDBDestino(db, cbConexDestino.SelectedItem?.ToString());
                                                 viaje.Arcos.Add(new Arco() { Origen = origen, Destino = destino, Demora = dtpConexDemora.Value.ToShortTimeString(), Precio = Convert.ToDouble(nudConexPrecio.Value) });
                                                 if (cbConexOrigen.Items.Count > 0) cbConexOrigen.SelectedIndex = 0;
                                                 if (cbConexDestino.Items.Count > 0) cbConexDestino.SelectedIndex = 0;
@@ -1525,7 +1532,7 @@ namespace Sistema_final
                                     {
                                         if (viaje != null)
                                         {
-                                            if (cbConexConexion.SelectedItem.ToString() != string.Empty)
+                                            if (cbConexConexion.SelectedItem?.ToString() != string.Empty)
                                             {
 
                                             }
@@ -1616,15 +1623,15 @@ namespace Sistema_final
                 {
                     case 0:
                         if (rbViajeModificar.Checked || rbViajeEliminar.Checked)
-                            text = cbViajeTrayecto.SelectedItem.ToString();
+                            text = cbViajeTrayecto.SelectedItem?.ToString();
                         else
-                            text = cbConexTrayecto.SelectedItem.ToString();
+                            text = cbConexTrayecto.SelectedItem?.ToString();
                         break;
                     case 1:
-                        text = cbHorTrayecto.SelectedItem.ToString();
+                        text = cbHorTrayecto.SelectedItem?.ToString();
                         break;
                     case 2:
-                        text = cbDestinosTrayecto.SelectedItem.ToString();
+                        text = cbDestinosTrayecto.SelectedItem?.ToString();
                         break;
                     default:
                         break;
@@ -1634,12 +1641,6 @@ namespace Sistema_final
                 var viaje = GetDBViaje(db, text);
                 if (viaje != null)
                 {   
-                    /*
-                    GMapProviders.GoogleMap.ApiKey = "AIzaSyBJXrCouc2VRaL1NU7dH2gkDZECVWYZtUE";
-                    GMaps.Instance.Mode = AccessMode.ServerAndCache;
-                    gMPMapa.CacheLocation = @"cache";
-                    */
-
                     mOverlayViaje.Markers.Clear();
                     mOverlayRutas.Routes.Clear();
                     foreach (var arco in viaje.Arcos)
@@ -1656,7 +1657,7 @@ namespace Sistema_final
                             PointLatLng end = new PointLatLng(arco.Destino.Latitud, arco.Destino.Longitud);
 
                             var route = GoogleMapProvider.Instance.GetRoute(start, end, false, false, 14);
-                            var r = new GMapRoute(route.Points, "Ruta") { Stroke = new Pen(Color.MediumBlue, 4) };
+                            GMapRoute r = new(route.Points, "Ruta") { Stroke = new Pen(Color.MediumBlue, 4) };
 
                             mOverlayRutas.Routes.Add(r);
                         }
@@ -1697,7 +1698,7 @@ namespace Sistema_final
 
                 try
                 {
-                    string text = cbLugar.SelectedItem.ToString();
+                    string text = cbLugar.SelectedItem?.ToString();
 
                     Destino d = null;
 
@@ -1733,7 +1734,7 @@ namespace Sistema_final
             {
                 try
                 {
-                    Viaje viaje = GetDBViaje(db, cbHorTrayecto.SelectedItem.ToString());
+                    Viaje viaje = GetDBViaje(db, cbHorTrayecto.SelectedItem?.ToString());
                     if (viaje != null)
                     {
                         cbHorHorarios.Items.Clear();
@@ -1894,7 +1895,7 @@ namespace Sistema_final
         public static Viaje GetDBViaje(EntityDataModel db, string nombre_viaje)
         {
             IQueryable<Viaje> viaje = (from v in db.Viajes where v.Nombre == nombre_viaje select v);
-            if (viaje.Count() != 0)
+            if (viaje.Any())
             {
                 Viaje_LoadReferences(viaje.First(), db);
                 return viaje.First();
@@ -1905,7 +1906,7 @@ namespace Sistema_final
         public static Distribucion GetDBDistribucion(EntityDataModel db, string nota)
         {
             IQueryable<Distribucion> distribucion = (from d in db.Distribuciones where d.Nota == nota select d);
-            if (distribucion.Count() != 0)
+            if (distribucion.Any())
             {
                 Distribucion_LoadReferences(distribucion.First(), db);
                 return distribucion.First();
@@ -1916,7 +1917,7 @@ namespace Sistema_final
         public static Boleto GetDBBoleto(EntityDataModel db, int id)
         {
             IQueryable<Boleto> boleto = (from b in db.Boletos where b.ID == id select b);
-            if (boleto.Count() != 0)
+            if (boleto.Any())
             {
                 Boleto_LoadReferences(boleto.First(), db);
                 return boleto.First();
@@ -1927,7 +1928,7 @@ namespace Sistema_final
         public static Destino GetDBDestino(EntityDataModel db, string nombre_destino)
         {
             IQueryable<Destino> destino = (from d in db.Destinos where d.Nombre == nombre_destino select d);
-            if(destino.Count() != 0)
+            if(destino.Any())
             {
                 return destino.First();
             }
@@ -1937,7 +1938,7 @@ namespace Sistema_final
         public static Cliente GetDBCliente(EntityDataModel db, string nombre_cliente)
         {
             IQueryable<Cliente> cliente = (from c in db.Clientes where c.Nombre == nombre_cliente select c);
-            if(cliente.Count() != 0)
+            if(cliente.Any())
             {
                 return cliente.First();
             }
@@ -1947,7 +1948,7 @@ namespace Sistema_final
         public static Cliente GetDBCliente(EntityDataModel db, long dni_cliente)
         {
             IQueryable<Cliente> cliente = (from c in db.Clientes where c.DNI == dni_cliente select c);
-            if(cliente.Count() != 0)
+            if(cliente.Any())
             {
                 return cliente.First();
             }
@@ -1957,7 +1958,7 @@ namespace Sistema_final
         public static Cuenta GetDBCuenta(EntityDataModel db, string usuario)
         {
             IQueryable<Cuenta> cuenta = (from c in db.Cuentas where c.Usuario == usuario select c);
-            if (cuenta.Count() != 0)
+            if (cuenta.Any())
             {
                 return cuenta.First();
             }
@@ -1977,7 +1978,8 @@ namespace Sistema_final
         public static DateTime GetDBDateNow(EntityDataModel db)
         {
             if (db != null)
-                return db.Database.SqlQuery<DateTime>("SELECT GetDate()").First();
+                return DateTime.Now;
+                //return db.Database.SqlQuery<DateTime>("SELECT GetDate()").First();
             else return new DateTime();
         }
 
@@ -2068,7 +2070,7 @@ namespace Sistema_final
                 {
                     RadioButton button = (RadioButton)((ContextMenuStrip)(sender as ToolStripMenuItem).Owner).SourceControl;
 
-                    Destino origen = GetDBDestino(db, cbLugar.SelectedItem.ToString());
+                    Destino origen = GetDBDestino(db, cbLugar.SelectedItem?.ToString());
                     Destino destino = (from d in db.Destinos where d.Id.ToString() == button.Tag.ToString() select d).FirstOrDefault();
 
                     cbConexOrigen.SelectedItem = origen.Nombre;
@@ -2091,7 +2093,7 @@ namespace Sistema_final
                 {
                     RadioButton button = (RadioButton)((ContextMenuStrip)(sender as ToolStripMenuItem).Owner).SourceControl;
 
-                    Destino origen = GetDBDestino(db, cbLugar.SelectedItem.ToString());
+                    Destino origen = GetDBDestino(db, cbLugar.SelectedItem?.ToString());
                     Destino destino = (from d in db.Destinos where d.Id.ToString() == button.Tag.ToString() select d).FirstOrDefault();
 
                     cbConexOrigen.SelectedItem = origen.Nombre;
@@ -2111,7 +2113,7 @@ namespace Sistema_final
             {
                 RadioButton button = (RadioButton)(sender as ContextMenuStrip).SourceControl;
 
-                Destino origen = GetDBDestino(db, cbLugar.SelectedItem.ToString());
+                Destino origen = GetDBDestino(db, cbLugar.SelectedItem?.ToString());
                 Destino destino = (from d in db.Destinos where d.Id.ToString() == button.Tag.ToString() select d).FirstOrDefault();
 
                 if (destino != null)
@@ -2165,7 +2167,7 @@ namespace Sistema_final
             {
                 try
                 {
-                    IGeocoder geocoder = new GoogleGeocoder() { ApiKey = "AIzaSyBJXrCouc2VRaL1NU7dH2gkDZECVWYZtUE" };
+                    IGeocoder geocoder = new GoogleGeocoder() { ApiKey = Program.Configuration["Google-Api-Key"] };
                     addresses = geocoder.Geocode(tbNombre.Text);
                     if (addresses != null)
                     {

@@ -1,4 +1,4 @@
-﻿namespace Sistema_final
+﻿namespace Boleteria
 {
     partial class frmLogin
     {
@@ -120,7 +120,7 @@
             // 
             // pbVerErrorSexo
             // 
-            this.pbVerErrorSexo.Image = global::Sistema_final.Properties.Resources.descarga;
+            this.pbVerErrorSexo.Image = global::Boleteria.Properties.Resources.descarga;
             this.pbVerErrorSexo.Location = new System.Drawing.Point(481, 377);
             this.pbVerErrorSexo.Name = "pbVerErrorSexo";
             this.pbVerErrorSexo.Size = new System.Drawing.Size(28, 22);
@@ -132,7 +132,7 @@
             // 
             // pbVerSexo
             // 
-            this.pbVerSexo.Image = global::Sistema_final.Properties.Resources.descarga;
+            this.pbVerSexo.Image = global::Boleteria.Properties.Resources.descarga;
             this.pbVerSexo.Location = new System.Drawing.Point(481, 377);
             this.pbVerSexo.Name = "pbVerSexo";
             this.pbVerSexo.Size = new System.Drawing.Size(28, 22);
@@ -144,7 +144,7 @@
             // 
             // pbVerErrorContraseña
             // 
-            this.pbVerErrorContraseña.Image = global::Sistema_final.Properties.Resources.error;
+            this.pbVerErrorContraseña.Image = global::Boleteria.Properties.Resources.error;
             this.pbVerErrorContraseña.Location = new System.Drawing.Point(481, 249);
             this.pbVerErrorContraseña.Name = "pbVerErrorContraseña";
             this.pbVerErrorContraseña.Size = new System.Drawing.Size(28, 22);
@@ -157,7 +157,7 @@
             // 
             // pbVerContraseña
             // 
-            this.pbVerContraseña.Image = global::Sistema_final.Properties.Resources.descarga;
+            this.pbVerContraseña.Image = global::Boleteria.Properties.Resources.descarga;
             this.pbVerContraseña.Location = new System.Drawing.Point(481, 250);
             this.pbVerContraseña.Name = "pbVerContraseña";
             this.pbVerContraseña.Size = new System.Drawing.Size(28, 22);
@@ -169,7 +169,7 @@
             // 
             // pbVerErrorUsuario
             // 
-            this.pbVerErrorUsuario.Image = global::Sistema_final.Properties.Resources.error;
+            this.pbVerErrorUsuario.Image = global::Boleteria.Properties.Resources.error;
             this.pbVerErrorUsuario.Location = new System.Drawing.Point(482, 218);
             this.pbVerErrorUsuario.Name = "pbVerErrorUsuario";
             this.pbVerErrorUsuario.Size = new System.Drawing.Size(28, 22);
@@ -182,7 +182,7 @@
             // 
             // pbVerUsuario
             // 
-            this.pbVerUsuario.Image = global::Sistema_final.Properties.Resources.descarga;
+            this.pbVerUsuario.Image = global::Boleteria.Properties.Resources.descarga;
             this.pbVerUsuario.Location = new System.Drawing.Point(482, 217);
             this.pbVerUsuario.Name = "pbVerUsuario";
             this.pbVerUsuario.Size = new System.Drawing.Size(28, 22);
@@ -195,7 +195,7 @@
             // btnMostrarC
             // 
             this.btnMostrarC.BackColor = System.Drawing.Color.Transparent;
-            this.btnMostrarC.BackgroundImage = global::Sistema_final.Properties.Resources._31624;
+            this.btnMostrarC.BackgroundImage = global::Boleteria.Properties.Resources._31624;
             this.btnMostrarC.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMostrarC.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.btnMostrarC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
@@ -215,7 +215,7 @@
             // 
             this.pbInicio.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pbInicio.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbInicio.Image = global::Sistema_final.Properties.Resources.colectivo;
+            this.pbInicio.Image = global::Boleteria.Properties.Resources.colectivo;
             this.pbInicio.Location = new System.Drawing.Point(40, 22);
             this.pbInicio.Name = "pbInicio";
             this.pbInicio.Size = new System.Drawing.Size(434, 184);
@@ -237,7 +237,7 @@
             // 
             this.btnRegistrarse.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnRegistrarse.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrarse.Image = global::Sistema_final.Properties.Resources.crear_cuenta;
+            this.btnRegistrarse.Image = global::Boleteria.Properties.Resources.crear_cuenta;
             this.btnRegistrarse.Location = new System.Drawing.Point(6, 452);
             this.btnRegistrarse.Name = "btnRegistrarse";
             this.btnRegistrarse.Size = new System.Drawing.Size(126, 40);
@@ -267,7 +267,7 @@
             this.btnIngresar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnIngresar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnIngresar.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIngresar.Image = global::Sistema_final.Properties.Resources.inicio_sesion1;
+            this.btnIngresar.Image = global::Boleteria.Properties.Resources.inicio_sesion1;
             this.btnIngresar.Location = new System.Drawing.Point(205, 453);
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(186, 40);

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Sistema_final.Properties
+namespace Boleteria.Properties
 {
 
 
