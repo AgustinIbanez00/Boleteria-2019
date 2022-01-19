@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
@@ -26,7 +26,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Boleteria.Core.Models\Boleteria.Core.csproj" />
+    <ProjectReference Include="..\Boleteria.Core\Boleteria.Core.csproj" />
     <ProjectReference Include="..\Controles\Controles.csproj" />
   </ItemGroup>
   <ItemGroup>

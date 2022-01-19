@@ -391,6 +391,10 @@ namespace Boleteria
                     {
 
                     }
+                    catch(ArgumentNullException)
+                    {
+
+                    }
                 }
             }
         }
